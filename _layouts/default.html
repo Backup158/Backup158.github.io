@@ -10,7 +10,7 @@
         <h3>{{ item.title }}</a></h3>
         <ul>
           {% for entry in item.subfolderitems %}
-            <li><a class="{% if page.url == entry.link %} active{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a></li>
+            <li><a class="{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a></li>
           {% endfor %}
         </ul>
       {% endfor %}
