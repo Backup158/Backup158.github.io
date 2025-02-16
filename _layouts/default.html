@@ -7,9 +7,28 @@
   <body>
     <nav>
       {% for item in site.data.navigation %}
-          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          <li><a class="{% if page.url == item.link %} active{% endif %}" href="{{ item.url }}">{{ item.title }}</a></li>
       {% endfor %}
     </nav>
     {{ content }}
+
+    <style>
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+      nav ul li {
+        margin-right: 10px;
+      }
+      nav ul li a {
+        text-decoration: none;
+      }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+      .active {
+        text-decoration: italics;
+      }
+    </style>
   </body>
 </html>
