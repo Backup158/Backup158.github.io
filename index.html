@@ -1,3 +1,6 @@
+---
+layout: default
+---
 <!DOCTYPE html>
 <meta http-equiv='cache-control' content='no-cache'> 
 <meta http-equiv='expires' content='0'> 
@@ -10,6 +13,11 @@
     <a href="#about">About</a>
   </div> 
   <body>
+    <nav>
+      {% for item in site.data.navigation %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+      {% endfor %}
+    </nav>
     <h1>Welcome</h1>
     <p>Welcome to City 17. </p>
     <h1>Documentation Links</h1>
