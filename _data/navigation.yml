@@ -3,8 +3,10 @@ toc:
     subfolderitems:
       - page: Desktop Startup Process
         url: /StartupProcess/
-      - page: Vencord Theme and Settings
+        description: Initializing my dual boot setup (Mint/Windows)
+      - page: Vencord Theme
         url: /VencordTheme/
+        description: Vencord Theme and Plugin Settings
       - page: Bash Scripts Collection
         url: /BashScripts/
       - page: GitHub Pages
@@ -13,3 +15,4 @@ toc:
     subfolderitems:
       - page: HD2MM on Linux
         url: /HD2MM_Linux.html
+        description: Running Helldivers 2 Mod Manager on Linux
