@@ -6,9 +6,9 @@
   </head>
   <body>
     <nav>
-      <h3><a href="{{ site.data.navigation.home.url }}">{{ site.data.navigation.home.title }}</a></h3>
+      <h3 class="navbarHeader"><a href="{{ site.data.navigation.home.url }}">{{ site.data.navigation.home.title }}</a></h3>
       {% for item in site.data.navigation.toc %}
-        <h3>{{ item.title }}</h3>
+        <h3 class="navbarHeader">{{ item.title }}</h3>
         <ul>
           {% for entry in item.subfolderitems %}
             <li><a class="{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url }}">{{ entry.page }}</a></li>
@@ -34,6 +34,10 @@
       }
       .active {
         font-style: italic;
+      }
+      .navbarHeader {
+        margin-top: 8px;
+        margin-bottom: 8px;
       }
     </style>
   </body>
