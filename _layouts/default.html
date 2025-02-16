@@ -7,7 +7,7 @@
   <body>
     <nav>
       {% for item in site.data.navigation.toc %}
-        <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+        <h3>{{ item.title }}</a></h3>
         <ul>
           {% for entry in item.subfolderitems %}
             <li><a class="{% if page.url == entry.link %} active{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a></li>
