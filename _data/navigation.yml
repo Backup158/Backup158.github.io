@@ -1,6 +1,6 @@
 toc:
   - title: Home
-    url: /
+    url: /index.html
   - title: General Documentation
     subfolderitems:
       - page: Desktop Startup Process
