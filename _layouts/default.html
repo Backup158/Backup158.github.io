@@ -6,8 +6,13 @@
   </head>
   <body>
     <nav>
-      {% for item in site.data.navigation %}
-          <li><a class="{% if page.url == item.link %} active{% endif %}" href="{{ item.url }}">{{ item.title }}</a></li>
+      {% for item in site.data.navigation.toc %}
+        <h3>{{item.title }}</h3>
+        <ul>
+          {% for entry in item.subfolderitems %}
+            <li><a class="{% if page.url == item.link %} active{% endif %}" href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
       {% endfor %}
     </nav>
     {{ content }}
