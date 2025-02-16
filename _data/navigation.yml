@@ -1,0 +1,15 @@
+toc:
+  - title: General Documentation
+    subfolderitems:
+      - page: Desktop Startup Process
+        url: /StartupProcess/
+      - page: Vencord Theme and Settings
+        url: /VencordTheme/
+      - page: Bash Scripts Collection
+        url: /BashScripts/
+      - page: GitHub Pages
+        url: /PagesDocumentation.html
+  - title: Modding Documentation
+    subfolderitems:
+      - page: HD2MM on Linux
+        url: /HD2MM_Linux.html
