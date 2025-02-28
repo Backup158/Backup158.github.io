@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>HD2MM on Linux</title>
+  </head>
+  <body>
+    <button type="button" class="collapsible">Navigation</button>
+    <nav class="content">
+      <h3 class="navbarHeader"><a href="/index.html">Home</a></h3>
+      
+        <h3 class="navbarHeader">Documentation Repositories</h3>
+        <ul>
+          
+            <li><a class="" href="/StartupProcess/">Desktop Startup Process</a></li>
+          
+            <li><a class="" href="/VencordTheme/">Vencord Theme</a></li>
+          
+            <li><a class="" href="/BashScripts/">Bash Scripts Collection</a></li>
+          
+            <li><a class="" href="/PagesDocumentation.html">GitHub Pages</a></li>
+          
+        </ul>
+      
+        <h3 class="navbarHeader">Modding Documentation</h3>
+        <ul>
+          
+            <li><a class=" active" href="/HD2MM_Linux.html">HD2MM on Linux</a></li>
+          
+        </ul>
+      
+    </nav>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="Running Helldivers 2 Mod Manager on Linux">
+    <meta name="keywords" content="helldivers, helldivers 2, hd2mm, hd2modmanager, mod manager, linux, proton">
+    <title>HD2MM on Linux</title>
+  </head>
+  <body>
+    <h1>Introduction</h1>
+    This is a walkthrough on how to use <a href="https://www.nexusmods.com/helldivers2/mods/109">Helldivers 2 Mod Manager</a> (HD2MM) on Linux by using Steam and Proton. I'm assuming you have a cursory knowledge of filesystems and unzipping files.
+    <h1>Installation</h1>
+    <ol>
+        <li>Download HD2MM and unzip it somewhere</li>
+        <li>Open Steam and add HD2MM as a non-Steam game</li>
+            <ol>
+              <li>All the way at the top, click Game --> Add a Non-Steam Game to my Library --> Browse</li>
+              <li>Navigate to wherever you unzipped HD2MM and select the .exe</li>
+            </ol>
+        <li>Setup Proton for HD2MM</li>
+            <ol>
+                <li>In your Steam Library, right click HD2MM</li>
+                <li>Click Properties (This is where you can give it a cute name :3)</li>
+                <li>In the menu on the left, click Compatibility</li>
+                <li>Click Force the use of a specific Steam Play compatibility tool</li>
+                <li>Select a Proton version (I use GE-Proton because that's what I use for the game itself)</li>
+            </ol>
+        <li>Launch HD2MM through Steam</li>
+    </ol>
+      
+    At this point, the HD2MM window should appear and work as it does on Windows. The only difference is the file pathing.
+    <br>
+    <img src="https://github.com/user-attachments/assets/e8424467-a3bd-4a29-8868-ca5a8492bce6" alt="hd2mm file path">
+    <br>
+    From this point on, follow the regular guides on how to use HD2MM.
+  </body>
+</html>
+
+
+    <style>
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      nav ul li {
+        margin-right: 10px;
+      }
+      nav ul li a {
+        text-decoration: none;
+      }
+      nav h3 a {
+        text-decoration: none;
+      }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+      /* Hyperlink for currently active page. Background color matches collapsible for navbar */
+      .active {
+        font-style: italic;
+        background-color: #eee;
+      }
+      .navbarHeader {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+      /* Style the button that is used to open and close the collapsible content */
+      .collapsible {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px 18px 18px 54px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+      }
+      
+      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+      .active, .collapsible:hover {
+        background-color: #ccc;
+      }
+      
+      /* Style the collapsible content. Note: hidden by default */
+      .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+      } 
+
+      /* Gives body some left padding so it's not all cramped */
+      .bodyContent {
+        padding-left: 36px
+      }
+    </style>
+    
+    <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script>
+  </body>
+</html>

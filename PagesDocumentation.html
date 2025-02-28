@@ -6,6 +6,14 @@ title: GitHub Pages Notes
 <html>
   <body>
     <h1>Documentation-ception</h1>
+    <h2>Running Jekyll Locally</h2>
+    <p>First of all, check out the <a href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll">GitHub Pages guide</a><br>
+    This is written with you having read that in mind, but just spelling out things for the slow people (me).<br>
+    Having installed the prerequisites and cloned the repo, go to the local directory for the repo. Open the terminal there.<br>
+    To run Jekyll, you need a Gemfile. Create it, such as through `touch Gemfile`, then add `gem 'jekyll'` to add that as a dependency.<br>
+    The rest of the instructions are clear as is. 
+    </p>
+    <h2>Linking Pages</h2>
     <ul>
       Various ways I've tried linking with GitHub Pages after I hadn't used HTML for years.
       Each entry has a score [0, 1], indicating if it works (and how well, ish)
@@ -18,5 +26,6 @@ title: GitHub Pages Notes
       <li><a href="StartupProcessCopy.md"> Relative linking to file in same repo.</a> but without the folder indicator</li>
       <li><a href="/StartupProcessCopy.md">1 Relative linking to file in same repo.</a> but with proper formatting, you stupid bitch</li>
     </ul>
+
   </body>
 </html>

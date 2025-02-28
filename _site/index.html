@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Home</title>
+  </head>
+  <body>
+    <button type="button" class="collapsible">Navigation</button>
+    <nav class="content">
+      <h3 class="navbarHeader"><a href="/index.html">Home</a></h3>
+      
+        <h3 class="navbarHeader">Documentation Repositories</h3>
+        <ul>
+          
+            <li><a class="" href="/StartupProcess/">Desktop Startup Process</a></li>
+          
+            <li><a class="" href="/VencordTheme/">Vencord Theme</a></li>
+          
+            <li><a class="" href="/BashScripts/">Bash Scripts Collection</a></li>
+          
+            <li><a class="" href="/PagesDocumentation.html">GitHub Pages</a></li>
+          
+        </ul>
+      
+        <h3 class="navbarHeader">Modding Documentation</h3>
+        <ul>
+          
+            <li><a class="" href="/HD2MM_Linux.html">HD2MM on Linux</a></li>
+          
+        </ul>
+      
+    </nav>
+    <h1 class="bodyContent">Welcome</h1>
+<p class="bodyContent">Welcome to City 17. </p>
+<h1 class="bodyContent">Navigation</h1>
+<p class="bodyContent">Links to notes from this site and to the <code>README</code> files for my other repositories.<br>
+  You can only navigate back to this home page through the browser controls (no return links on the pages); I want to keep these isolated from the rest of this site's pages.</p>
+
+
+    <style>
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      nav ul li {
+        margin-right: 10px;
+      }
+      nav ul li a {
+        text-decoration: none;
+      }
+      nav h3 a {
+        text-decoration: none;
+      }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+      /* Hyperlink for currently active page. Background color matches collapsible for navbar */
+      .active {
+        font-style: italic;
+        background-color: #eee;
+      }
+      .navbarHeader {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+      /* Style the button that is used to open and close the collapsible content */
+      .collapsible {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px 18px 18px 54px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+      }
+      
+      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+      .active, .collapsible:hover {
+        background-color: #ccc;
+      }
+      
+      /* Style the collapsible content. Note: hidden by default */
+      .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+      } 
+
+      /* Gives body some left padding so it's not all cramped */
+      .bodyContent {
+        padding-left: 36px
+      }
+    </style>
+    
+    <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script>
+  </body>
+</html>
