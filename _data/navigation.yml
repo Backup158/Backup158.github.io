@@ -16,3 +16,6 @@ toc:
       - page: HD2MM on Linux
         url: /HD2MM_Linux.html
         description: Running Helldivers 2 Mod Manager on Linux
+      - page: Darktide Weapon Customization Edits
+        url: /Darktide_EWC_Edits.html
+        description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod

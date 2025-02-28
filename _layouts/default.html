@@ -23,7 +23,8 @@
     <style>
       nav ul {
         display: flex;
-        list-style: none;
+        list-style: "> ";
+        list-style-position: inside;
         margin-top: 2px;
         margin-bottom: 2px;
       }
@@ -75,8 +76,21 @@
       } 
 
       /* Gives body some left padding so it's not all cramped */
-      .bodyContent {
+      /*.bodyContent */
+      body {
         padding-left: 36px
+      }
+
+      /* Making the list in ewc edits page less spaced out */
+      .ewc ol {
+        margin: 2px;
+      }
+      .ewc ol li {
+        margin: 2px;
+      }
+      /* I don't like how spaced out the titles are */
+      .ewc {
+        margin-bottom: 8px;
       }
     </style>
     

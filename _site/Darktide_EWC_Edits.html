@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Darktide Weapon Customization Edits</title>
+  </head>
+  <body>
+    <button type="button" class="collapsible">Navigation</button>
+    <nav class="content">
+      <h3 class="navbarHeader"><a href="/index.html">Home</a></h3>
+      
+        <h3 class="navbarHeader">Documentation Repositories</h3>
+        <ul>
+          
+            <li><a class="" href="/StartupProcess/">Desktop Startup Process</a></li>
+          
+            <li><a class="" href="/VencordTheme/">Vencord Theme</a></li>
+          
+            <li><a class="" href="/BashScripts/">Bash Scripts Collection</a></li>
+          
+            <li><a class="" href="/PagesDocumentation.html">GitHub Pages</a></li>
+          
+        </ul>
+      
+        <h3 class="navbarHeader">Modding Documentation</h3>
+        <ul>
+          
+            <li><a class="" href="/HD2MM_Linux.html">HD2MM on Linux</a></li>
+          
+            <li><a class=" active" href="/Darktide_EWC_Edits.html">Darktide Weapon Customization Edits</a></li>
+          
+        </ul>
+      
+    </nav>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="Making adjustments to attachments for the Darktide Extended Weapon Customization mod.">
+    <meta name="keywords" content="Darktide, 40k, Weapon Customization, Extended Weapon Customization, mods, modding">
+    <title>Darktide: Making Weapon Customization Edits</title>
+  </head>
+  <body>
+    <h1 class="ewc">Introduction</h1>
+    This is a walkthrough on how to make edits to parts from the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod and any of its plugins for <i>Warhammer 40,000: Darktide</i>. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods of Darktide.<br>
+    <br>
+    Firstly, this will be much easier to follow if you understand how EWC moves attachments. One of the best ways to learn is to join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> with the download for the plugin template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
+    I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks.
+    <h1 class="ewc">Walkthrough</h1>
+    Here's a specific example. I equipped this combination of parts on a Force Greatsword; look at that ugly gap!<br>
+    <img src="images/Screenshot 2025-02-28 09-39-57.png" alt="FGS gap 1"><br>
+    This does not spark joy! To fix it, I need to change the position values for the pommel.<br>
+    <h2 class="ewc">Injecting Fixes</h2>
+    After fixes get injected, the mod searches for the first one that matches (from top down). The base mod and plugins will have their own fixes injected, but these are typically written for broad, generic cases. You could create your own fixes, and there's two options for where to keep them:
+    <ol class="ewc">
+      <li>Directly in one of the plugins</li>
+      <li>In your own fixes-only plugin</li>
+    </ol>
+    I would ONLY put the fixes in one of the plugins if it's a simple, one-time thing and you're ok with losing it when they update it. You can quickly make a custom plugin using the template; I'll elaborate in this collapsed section. In my example screenshots, I'll be doing it through a separate plugin, but the general idea is the same. 
+    <button type="button" class="collapsible">Making a basic plugin</button>
+    <divPlugin class="content">
+    Making a plugin blah blah
+    </divPlugin>
+    Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
+    <img src="images/Screenshot 2025-02-28 09-39-19 (copy).png" alt="FGS gap 2"> <br>
+    <h3 class="ewc">Finding attachment_ids</h3>
+    The first step is figuring out <b>which plugin the attachment came from</b> and making note of it the <b>attachment name</b>.<br>
+    &emsp;Generally, the position on the list will tell you which one it's from. It goes <b>base mod --> plugins</b>, in reverse load order.<br>
+    &emsp;So if you're using Syn's Edits and the MT plugin, the first options will be from the base mod, then there's the options from the MT plugin, then the options from Syn's plugin. This is because Syn's Edits comes before the MT plugin in the load order.<br>
+    &emsp;Some plugins, namely the MT plugin, will have an indicator at the start of the name to clearly distinguish it.<br>
+    Now that you know the attachment name and which plugin it's from, you can find the attachment_id. Within each plugin, the displayed name and attachment_id are kept in the same place.<br>
+    &emsp;For the base mod, this is either in the common files in <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> or deeper, within the individual weapon files in <code>functions/</code>. Note that the weapon names are the names based on the code.<br>
+    &emsp;For the MT plugin, these are in <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/melee.lua</code> and <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/ranged.lua</code>. Other plugins based on this will have a similar structure.<br>
+    Going back to my example, I will start with finding the grip. I see that the name is "Power Sword 4" and it's a base mod attachment, so I'll go look in the weapon_customization mod folder. I go to <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> and see <code>common_melee.lua</code>.<br>
+    <img src="images/FindingAttachmentId1.png" alt="common_melee.lua in the folder"><br>
+    Now I'll do a quick search. <br>
+    <img src="images/FindingAttachmentId2 (copy).png" alt="Power Sword grip 4"><br>
+    Ah! "power_sword_blade_04" I'll make a note of that. Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01". The pommel isn't in this file, so I'll check the individual weapon file.<br>
+    <img src="images/FindingAttachmentId3.png" alt="forcesword_2h_p1_m1.lua in the folder"><br>
+
+    <img src="images/Screenshot 2025-02-28 09-39-13.png" alt="FGS no gap"> <br>
+  </body>
+</html>
+
+
+    <style>
+      nav ul {
+        display: flex;
+        list-style: "> ";
+        list-style-position: inside;
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      nav ul li {
+        margin-right: 10px;
+      }
+      nav ul li a {
+        text-decoration: none;
+      }
+      nav h3 a {
+        text-decoration: none;
+      }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+      /* Hyperlink for currently active page. Background color matches collapsible for navbar */
+      .active {
+        font-style: italic;
+        background-color: #eee;
+      }
+      .navbarHeader {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+      /* Style the button that is used to open and close the collapsible content */
+      .collapsible {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px 18px 18px 54px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+      }
+      
+      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+      .active, .collapsible:hover {
+        background-color: #ccc;
+      }
+      
+      /* Style the collapsible content. Note: hidden by default */
+      .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+      } 
+
+      /* Gives body some left padding so it's not all cramped */
+      /*.bodyContent */
+      body {
+        padding-left: 36px
+      }
+
+      /* Making the list in ewc edits page less spaced out */
+      .ewc ol {
+        margin: 2px;
+      }
+      .ewc ol li {
+        margin: 2px;
+      }
+      /* I don't like how spaced out the titles are */
+      .ewc {
+        margin-bottom: 8px;
+      }
+    </style>
+    
+    <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script>
+  </body>
+</html>
