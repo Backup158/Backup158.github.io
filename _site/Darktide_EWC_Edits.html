@@ -46,7 +46,7 @@
     <h1 class="ewc">Requirements</h1>
     <ul>
       <li>Any text editor, preferably one with syntax highlighting. Notepad will work in a pinch, but programs such as Notepad++ or <a href="https://code.visualstudio.com/">Visual Studio Code</a> are much more powerful.</li>
-      <li>The weapon_customization_plugin template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
+      <li>The <code>weapon_customization_plugin</code> template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
         Even if you don't read this, it's needed for one of the methods for injecting fixes.<br>
         &emsp;I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks. To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a></li>
       <li><a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a>. This adds a menu that lets you move each attachment and see the changes live.<br>
@@ -71,8 +71,16 @@
       <img src="images/StripPlugin1.png" alt="strip plugin"> <br>
       <img src="images/StripPlugin2.png" alt="strip plugin"> <br>
       <img src="images/StripPlugin3.png" alt="strip plugin"> <br>
+      Feel free to change the name, but keep in mind that you'll need to rename the folders, the .mod and .lua files, and any mentions of the name within those files.<br>
+      <br>
       Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code structure).<br>
       I put this file below the main plugin but above the other plugins. It needs to be below the main plugin so that can create its anchor tables (which you're injecting into) first.<br>
+      <br>
+      You don't have to go this far, but here's is my ultra stripped version with some personal edits.<br>
+      <img src="images/CustomPluginEmptyNoHomo.png" alt="strip plugin personal"> <br>
+      First I did all the things I mentioned above, except I also cleared out the inject fixes section. I also cleared out the comments at the top. Then, I modified the <code>if statement</code>> so it exits the program if you're missing requirements. This means fixes are injected OUTSIDE the <code>if then end</code>.<br>
+      In the regular template, you inject fixes INSIDE the <code>if then end</code>, so before the two <code>end</code>s, because it does the opposite: only execute this code if the requirement is met.<br>
+      <br>
     </divPlugin>
     Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
     <img src="images/CustomizationOptions.png" alt="FGS gap 2"> <br>
@@ -84,26 +92,28 @@
     Now that you know the attachment name and which plugin it's from, you can find the attachment_id. Within each plugin, the displayed name and attachment_id are kept in the same place.<br>
     &emsp;For the base mod, this is either in the common in <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> or deeper, within the individual weapon files in <code>functions/</code>. Note that the weapon names are the names based on the code. You'll also see individual weapon files in the first folder I mentioned; that's where fixes from the base mod are stored.<br>
     &emsp;For the MT plugin, these are in <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/melee.lua</code> and <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/ranged.lua</code>. Other plugins based on this will have a similar structure.<br>
-    &emsp;You could also just use some search methods. These are <i>much</i> easier and faster, but I'll still go through the steps of doing it manually.
+    &emsp;You could also just use some search methods. These are <i>much</i> easier and faster, but I'll still go through the steps of doing it manually to be thorough.<br>
     <button type="button" class="collapsibleNotSoSmol">Search Methods</button>
     <divPlugin class="contentNotSoSmol">
-      The easiest way is to search by using VS Code. Drag the folder you want to search into VS Code, then open the search bar by clicking the magnifying glass on the left.<br>
+      The easiest way is to search through VS Code. Drag the folder you want to search into VS Code, then open the search bar by clicking the magnifying glass on the left.<br>
       <img src="images/searchVSCode1.png" alt="vs code"><br>
       <img src="images/searchVSCode2.png" alt="vs code search"><br>
-      Here's me searching all the files by using the command line (on Linux)
+      Here's me searching all the files by using the command line (on Linux). <code>grep</code> searches for things in files, the <code>R</code> flag means search files within folders, and the <code>n</code> flag means it'll print the line number too. For a Windows equivalent, search the Internet I guess. 
       <img src="images/FindingAttachmentIdCLI.png" alt="grep"><br>
     </divPlugin><br>
-    Going back to my example, I will start with finding the grip. I see that the name is "Power Sword 4" and it's a base mod attachment, so I'll go look in the weapon_customization mod folder. I go to <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> and see <code>common_melee.lua</code>.<br>
+    Going back to my example, I will start with finding the grip. I see that the name is "Power Sword 4" and it's a base mod attachment, so I'll go look in the <code>weapon_customization</code> mod folder. I go to <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> and see <code>common_melee.lua</code>.<br>
     <img src="images/FindingAttachmentId1.png" alt="common_melee.lua in the folder" class="smol"><br>
     Now I'll do a quick search. <br>
     <img src="images/FindingAttachmentId2.png" alt="Power Sword grip 4"><br>
     Ah! "power_sword_grip_04" I'll make a note of that. Now that you have an idea of how it works, I'll find the rest of them in this spoiler: <button type="button" class="collapsible">More manual searching</button>
     <divPlugin class="content">
-      Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01". I didn't see the pommel in this file, so I'll check the individual weapon files. I didn't find it in either of them, but I did find this:<br>
+      Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01".<br>
+      I didn't see the pommel in this file, so I'll check the individual weapon file. I didn't find it, but I did find this:<br>
       <img src="images/FindingAttachmentId4.png" alt="pommels are in common"><br>
       Ok, that means it <i>was</i> in <code>common_melee.lua</code>, just not directly. I'll go back and look deeper.<br>
       <img src="images/FindingAttachmentId5.png" alt="pommels in common"><br>
-      This part means that the common melee pommels includes all the pommels from the pommel_attachments table in all of these base files. The ones I've boxed are the most likely ones Therefore, I'll visit <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments/functions/</code> and search the suspects. Going through them all, turns out it's in the Crusher file and it's called "2h_power_maul_pommel_03".<br>
+      This part means that the common melee pommels includes all the pommels from the pommel_attachments table in all of these base files. Based on the names, the ones I've boxed are the most likely candidates. Therefore, I'll visit <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments/functions/</code> and search through each suspect.<br>
+      Going through them all, turns out it's in the Crusher file, and it's called "2h_power_maul_pommel_03".<br>
       <img src="images/FindingAttachmentId8.png" alt="crusher 2h power maul file" class="smol"><br>
     </divPlugin><br>
     By now, you have the attachment_ids for all the relevant parts. You can now start actually making fixes.
@@ -115,8 +125,8 @@
     <img src="images/injectFixes2.png" alt="inject fixes example"><br>
     If you're piggybacking off of an existing plugin, copy over the fixes WITHOUT the <code>table.prepend</code> stuff. Here is an example with the MT Plugin (and it's in the Devil's Claw Sword file but shush)<br>
     <img src="images/injectFixesMT.png" alt="inject fixes example MT"><br>
-    I've also initialized the fixes with some default values. It's actually best if you don't use 0 for everything, but I'll do it this way to show why. Here's the code for easy copy pasting:<br>
-    &emsp;<code>{ position = vector3_box(0.0, 0.0, 0.0), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.0, 1.0, 1.0)},</code><br>
+    I've also initialized the fixes with some default values. It's actually best if you don't use 0 for everything, but I'll do it this way to show why. Here's the (good) code for easy copy pasting:<br>
+    &emsp;<code>{ position = vector3_box(0.0, 0.0, 0.01), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.0, 1.0, 1.0)},</code><br>
     Alright, so how do you actually find out the values to put? If you're crazy, you could find the original fix values then purely mentally calculate the effects of each change. I don't know about you, but I am <i>not</i> built like that. This is where Modding Tools comes in.
     <br>
     Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool.<br>
@@ -135,6 +145,7 @@
     Yippee!!! I'm gonna make some more minor edits, but you get the gist by now. Astute readers may have noticed that I have edited the blade even though I didn't put any dependencies for blade. This means I'm changing <i>every</i> blade, as long as the pommel/hilt/grip group is equipped. It's fine in this case, but you may find yourself having to redo the fixes if another blade comes out.<br>
     <br>
     <img src="images/injectFixes3.png" alt="FGS no gap fixes"> <br>
+    <img src="images/CustomPlugin.png" alt="plugin personal final"> <br>
     <img src="images/SwordGap2.png" alt="FGS no gap"> <br>
   </body>
 </html>
