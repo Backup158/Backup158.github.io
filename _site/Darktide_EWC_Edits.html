@@ -48,7 +48,7 @@
     I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks.
     <h1 class="ewc">Walkthrough</h1>
     Here's a specific example. I equipped this combination of parts on a Force Greatsword; look at that ugly gap!<br>
-    <img src="images/Screenshot 2025-02-28 09-39-57.png" alt="FGS gap 1" class="smol"><br>
+    <img src="images/SwordGap1.png" alt="FGS gap 1" class="smol"><br>
     This does not spark joy! To fix it, I need to change the position values for the pommel. While I'm at it, I might as well move the hilt down a bit.<br>
     <h2 class="ewc">Injecting Fixes</h2>
     After fixes get injected, the mod searches for the first one that matches (from top down). The base mod and plugins will have their own fixes injected, but these are typically written for broad, generic cases. You could create your own fixes, and there's two options for where to keep them:
@@ -64,10 +64,10 @@
       <img src="images/StripPlugin1.png" alt="strip plugin"> <br>
       <img src="images/StripPlugin2.png" alt="strip plugin"> <br>
       <img src="images/StripPlugin3.png" alt="strip plugin"> <br>
-      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code structure).
+      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code structure).<br>
     </divPlugin>
     Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
-    <img src="images/Screenshot 2025-02-28 09-39-19 (copy).png" alt="FGS gap 2"> <br>
+    <img src="images/CustomizationOptions.png" alt="FGS gap 2"> <br>
     <h3 class="ewc">Finding attachment_ids</h3>
     The first step is figuring out <b>which plugin the attachment came from</b> and making note of it the <b>attachment name</b>.<br>
     &emsp;Generally, the position on the list will tell you which one it's from. It goes <b>base mod --> plugins</b>, in reverse load order.<br>
@@ -76,20 +76,20 @@
     Now that you know the attachment name and which plugin it's from, you can find the attachment_id. Within each plugin, the displayed name and attachment_id are kept in the same place.<br>
     &emsp;For the base mod, this is either in the common in <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> or deeper, within the individual weapon files in <code>functions/</code>. Note that the weapon names are the names based on the code. You'll also see individual weapon files in the first folder I mentioned; that's where fixes from the base mod are stored.<br>
     &emsp;For the MT plugin, these are in <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/melee.lua</code> and <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/ranged.lua</code>. Other plugins based on this will have a similar structure.<br>
-    &emsp;You could also just use some search methods.
+    &emsp;You could also just use some search methods. These are <i>much</i> easier and faster, but I'll still go through the steps of doing it manually.
     <button type="button" class="collapsibleNotSoSmol">Search Methods</button>
     <divPlugin class="contentNotSoSmol">
       The easiest way is to search by using <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Drag the folder you want to search into VS Code, then open the search bar by clicking the magnifying glass on the left.<br>
-      <img src="images/searchVSCode1 (another copy).png" alt="vs code"><br>
-      <img src="images/searchVSCode3.png" alt="vs code search"><br>
-      Here's me searching all the files by using the command line
+      <img src="images/searchVSCode1.png" alt="vs code"><br>
+      <img src="images/searchVSCode2.png" alt="vs code search"><br>
+      Here's me searching all the files by using the command line (on Linux)
       <img src="images/FindingAttachmentIdCLI.png" alt="grep"><br>
     </divPlugin><br>
     Going back to my example, I will start with finding the grip. I see that the name is "Power Sword 4" and it's a base mod attachment, so I'll go look in the weapon_customization mod folder. I go to <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> and see <code>common_melee.lua</code>.<br>
     <img src="images/FindingAttachmentId1.png" alt="common_melee.lua in the folder" class="smol"><br>
     Now I'll do a quick search. <br>
     <img src="images/FindingAttachmentId2.png" alt="Power Sword grip 4"><br>
-    Ah! "power_sword_blade_04" I'll make a note of that. Now that you have an idea of how it works, I'll find the rest of them in this spoiler: <button type="button" class="collapsible">More manual searching</button>
+    Ah! "power_sword_grip_04" I'll make a note of that. Now that you have an idea of how it works, I'll find the rest of them in this spoiler: <button type="button" class="collapsible">More manual searching</button>
     <divPlugin class="content">
       Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01". I didn't see the pommel in this file, so I'll check the individual weapon files. I didn't find it in either of them, but I did find this:<br>
       <img src="images/FindingAttachmentId4.png" alt="pommels are in common"><br>
@@ -103,28 +103,29 @@
     Within the <code>weapon_customization_plugin</code> template, you can find an example injection.<br>
     <img src="images/injectFixes1 (another copy).png" alt="inject fixes"><br>
     Each weapon will require its own block (the square selection I made). Replace the weapon name, with the relevant weapon, then in the dependencies, put the relevant attachments. Separation by comma outside quotes means AND, having ! at the start means NOT, and being separated by | while inside quotes means OR.<br>
-    My Force Greatsword was using "power_sword_blade_04" AND "2h_force_sword_hilt_01" AND "2h_power_maul_pommel_03", so that's what I'll put in the dependencies. The change in spacings doesn't matter.<br>
+    My Force Greatsword was using "power_sword_grip_04" AND "2h_force_sword_hilt_01" AND "2h_power_maul_pommel_03", so that's what I'll put in the dependencies. The change in spacings doesn't matter.<br>
     <img src="images/injectFixes2.png" alt="inject fixes example"><br>
     I've also initialized the fixes with some default values. It's actually best if you make it slightly different for each line, but I'll do it this way to show why. Here's the code for easy copy pasting:<br>
     &emsp;<code>{ position = vector3_box(0.0, 0.0, 0.0), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.0, 1.0, 1.0)},</code><br>
     Alright, so how do you actually find out the values to put? If you're crazy, you could find the original fix values then purely mentally calculate the effects of each change. I don't know about you, but I am <i>not</i> built like that.<br>
     Instead, I'll use the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a> to figure it out. Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord. Why is it not on Nexus? I don't know.<br>
-    Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool.<br>
-    <img src="images/Screenshot 2025-02-28 17-44-43.png" alt="zeroed out sword" class="smol"><br>
-    That looks even worse, but that will change. Click on one of the pieces and start moving it around. Make note of the number that shows up.<br>
-    <img src="images/Screenshot 2025-02-28 17-45-27.png" alt="zeroed out sword" class="smol"><br>
-    That pommel looks much better! But why is there blob of options that I can't select properly? These are all parented to the same slot, so changes to the parent get inherited by the children. In this case, all the blade, hilt, and pommel and parented to the grip. This is why it's best to make the default values slightly different for each slot.<br>
     <br>
-    As a quirk of Modding Tools, you can't move the hilt if you can't click on it past the grip. So go back to the injected fixes, then change the position for the hilt by some arbitrary value (as an example, I made its position <code>(0.0, 0.2, 0.0)</code>). Go back to the game, close the inventory, reload mods through developer mode (or restart), then reopen it.<br>
-    <img src="images/Screenshot 2025-02-28 17-53-22.png" alt="tilted out sword" class="smol"><br>
-    ...Even uglier but now I can actually click things! Plus, now I know the blade is actually parented to the hilt. I'll get that out of the way, then move the hilt to where I want it. Once it looks right, I'll copy over the values to the plugin. Do this for all relevant parts.<br>
-    <img src="images/Screenshot 2025-02-28 17-53-56 a.png" alt="copy fixes" class="notSoSmol"><br>
+    Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool.<br>
+    <img src="images/MakingFixes1.png" alt="zeroed out sword" class="smol"><br>
+    That looks even worse, but that will change. Click on one of the pieces and start moving it around. Make note of the number that shows up.<br>
+    <img src="images/MakingFixes2.png" alt="zeroed out sword blob" class="smol"><br>
+    That pommel looks much better! But wait! Why is there blob of options that I can't select properly? These are all parented to the same slot, so changes to the parent get inherited by the children. In this case, the blade, hilt, and pommel are all parented to the grip. This is why it's best to make the default values slightly different for each slot.<br>
+    <br>
+    You can't move the hilt if you can't click on it. So go back to the injected fixes, then change the position for the hilt by some arbitrary value (as an example, I made its position <code>(0.0, 0.2, 0.0)</code>). Go back to the game, close the inventory, reload mods through developer mode (or restart the game), then reopen the cosmetics menu.<br>
+    <img src="images/MakingFixes3.png" alt="tilted out sword" class="smol"><br>
+    ...Even uglier but now I can actually click things! Plus, now I know the blade is actually parented to the hilt, not the grip as I assumed (this is defined close to where you find the attachment_id but I'm lazy). I'll get that out of the way, then move the hilt to where I want it. Once it looks right, I'll copy over the values to the plugin. Do this for all relevant parts (don't worry, I moved the blade back down).<br>
+    <img src="images/MakingFixes4.png" alt="copy fixes" class="notSoSmol"><br>
     Now close the inventory, reload or restart, and come back.<br>
-    <img src="images/Screenshot 2025-02-28 18-03-49.png" alt="fix sword" class="smol"><br>
-    Yippee!!! I'm gonna make some more minor edits, but you get the gist by now.<br>
+    <img src="images/MakingFixes5.png" alt="fix sword" class="smol"><br>
+    Yippee!!! I'm gonna make some more minor edits, but you get the gist by now. Astute readers may have noticed that I have edited the blade even though I didn't put any dependencies for blade. This means I'm changing <i>every</i> blade, as long as the pommel/hilt/grip group is equipped. It's fine in this case, but you may find yourself having to redo the fixes if another blade comes out.<br>
     <br>
     <img src="images/injectFixes3.png" alt="FGS no gap fixes"> <br>
-    <img src="images/Screenshot 2025-02-28 09-39-13.png" alt="FGS no gap"> <br>
+    <img src="images/SwordGap2.png" alt="FGS no gap"> <br>
   </body>
 </html>
 
