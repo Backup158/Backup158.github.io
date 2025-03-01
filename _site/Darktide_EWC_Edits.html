@@ -44,15 +44,15 @@
     <h1 class="ewc">Introduction</h1>
     This is a walkthrough on how to make edits to parts from the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod and any of its plugins for <i>Warhammer 40,000: Darktide</i>. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods for Darktide.<br>
     <h1 class="ewc">Requirements</h1>
-    <ul>
+    <ol>
       <li>Any text editor, preferably one with syntax highlighting. Notepad will work in a pinch, but programs such as Notepad++ or <a href="https://code.visualstudio.com/">Visual Studio Code</a> are much more powerful.</li>
-      <li>The <code>weapon_customization_plugin</code> template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
-        Even if you don't read this, it's needed for one of the methods for injecting fixes.<br>
-        &emsp;I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks. To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a></li>
       <li><a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a>. This adds a menu that lets you move each attachment and see the changes live.<br>
         Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord. Why is it not on Nexus? I don't know.</li>
-
-    </ul>
+      <li>The <code>weapon_customization_plugin</code> template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
+        Even if you don't read this, it's needed for one of the methods for injecting fixes.<br>
+        &emsp;I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks. To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> containing the template archive.</li>
+      <li>[Optional] Go to Mod Options --> Darktide Mod Framework --> Enable Developer Mode. This will let you reload mods (and see your fixes) without having to close the game. By default, you reload mods using <code>Ctrl + Shift + R</code>.</li>
+    </ol>
     <h1 class="ewc">Walkthrough</h1>
     Here's a specific example. I equipped this combination of parts on a Force Greatsword; look at that ugly gap!<br>
     <img src="images/SwordGap1.png" alt="FGS gap 1" class="smol"><br>
@@ -136,7 +136,7 @@
     That pommel looks much better! But wait! Why is there blob of options that I can't select properly? These are all parented to the same slot, so changes to the parent get inherited by the children. In this case, the blade, hilt, and pommel are all parented to the grip. This is why it's best to make the default values not just zeros throughout.<br>
     <br>
     You can't move the hilt if you can't click on it. So go back to the injected fixes, then change the position for the hilt by some arbitrary value (as an example, I made its position <code>(0.0, 0.2, 0.0)</code>, though <code>(0.0, 0.0, 0.1)</code> is less likely to go off screen).<br>
-    Go back to the game, close the inventory, reload mods through developer mode (or restart the game), then reopen the cosmetics menu.<br>
+    Go back to the game, close the inventory, reload mods (or restart the game), then reopen the cosmetics menu.<br>
     <img src="images/MakingFixes3.png" alt="tilted out sword" class="smol"><br>
     ...Even uglier but now I can actually click things! Plus, now I know the blade is actually parented to the hilt, not the grip as I assumed (this is defined close to where you find the attachment_id but I'm lazy). I'll get that out of the way, then move the hilt to where I want it. Once it looks right, I'll copy over the values to the plugin. Do this for all relevant parts (don't worry, I moved the blade back down).<br>
     <img src="images/MakingFixes4.png" alt="copy fixes" class="notSoSmol"><br>
