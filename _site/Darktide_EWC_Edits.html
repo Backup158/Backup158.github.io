@@ -56,10 +56,15 @@
       <li>Directly in one of the plugins</li>
       <li>In your own fixes-only plugin</li>
     </ol>
-    I would ONLY put the fixes in one of the plugins if it's a simple, one-time thing and you're ok with losing it when they update it. You can quickly make a custom plugin using the template; I'll elaborate in this collapsed section. In my example screenshots, I'll be doing it through a separate plugin, but the general idea is the same. 
+    I would ONLY put the fixes in one of the plugins if it's a simple, one-time thing and you're willing to risk losing it if you forget to transfer it over after the mod author update the plugin. You can quickly make a custom plugin using the template; I'll elaborate in this collapsed section. In my example screenshots, I'll be doing it through a separate plugin, but the general idea is the same. 
     <button type="button" class="collapsible">Making a basic plugin</button>
     <divPlugin class="content">
-    Making a plugin blah blah
+      Easiest way to do this is to copy over the template and strip it. Install the template as if it was a mod, then descend into the folders. Delete the <code>copy.cmd</code> script since you don't need that.<br>
+      Delete EVERYTHING inside the "Inject attachment definitions" and "Inject attachment models" sections. Feel free to delete the comments (lines beginning with <code>--</code>) for "Inject attachment fixes" but that could be handy to reference later. Delete the "Inject sight" segment, but make sure you DON'T delete the <code>end</code>s.<br>
+      <img src="images/StripPlugin1.png" alt="strip plugin"> <br>
+      <img src="images/StripPlugin2.png" alt="strip plugin"> <br>
+      <img src="images/StripPlugin3.png" alt="strip plugin"> <br>
+      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code structure).
     </divPlugin>
     Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
     <img src="images/Screenshot 2025-02-28 09-39-19 (copy).png" alt="FGS gap 2"> <br>
@@ -78,20 +83,20 @@
       <img src="images/searchVSCode1 (another copy).png" alt="vs code"><br>
       <img src="images/searchVSCode3.png" alt="vs code search"><br>
       Here's me searching all the files by using the command line
-      <img src="images/FindingAttachmentIdCLI (copy).png" alt="grep"><br>
+      <img src="images/FindingAttachmentIdCLI.png" alt="grep"><br>
     </divPlugin><br>
     Going back to my example, I will start with finding the grip. I see that the name is "Power Sword 4" and it's a base mod attachment, so I'll go look in the weapon_customization mod folder. I go to <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> and see <code>common_melee.lua</code>.<br>
     <img src="images/FindingAttachmentId1.png" alt="common_melee.lua in the folder" class="smol"><br>
     Now I'll do a quick search. <br>
-    <img src="images/FindingAttachmentId2 (copy).png" alt="Power Sword grip 4"><br>
+    <img src="images/FindingAttachmentId2.png" alt="Power Sword grip 4"><br>
     Ah! "power_sword_blade_04" I'll make a note of that. Now that you have an idea of how it works, I'll find the rest of them in this spoiler: <button type="button" class="collapsible">More manual searching</button>
     <divPlugin class="content">
       Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01". I didn't see the pommel in this file, so I'll check the individual weapon files. I didn't find it in either of them, but I did find this:<br>
-      <img src="images/FindingAttachmentId4 (copy).png" alt="pommels are in common"><br>
+      <img src="images/FindingAttachmentId4.png" alt="pommels are in common"><br>
       Ok, that means it <i>was</i> in <code>common_melee.lua</code>, just not directly. I'll go back and look deeper.<br>
-      <img src="images/FindingAttachmentId5 (copy).png" alt="pommels in common"><br>
+      <img src="images/FindingAttachmentId5.png" alt="pommels in common"><br>
       This part means that the common melee pommels includes all the pommels from the pommel_attachments table in all of these base files. The ones I've boxed are the most likely ones Therefore, I'll visit <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments/functions/</code> and search the suspects. Going through them all, turns out it's in the Crusher file and it's called "2h_power_maul_pommel_03".<br>
-      <img src="images/FindingAttachmentId8 (copy).png" alt="crusher 2h power maul file" class="smol"><br>
+      <img src="images/FindingAttachmentId8.png" alt="crusher 2h power maul file" class="smol"><br>
     </divPlugin><br>
     By now, you have the attachment_ids for all the relevant parts. You can now start actually making fixes.
     <h3 class="ewc">Creating and Injecting Fixes</h3>
@@ -118,6 +123,7 @@
     <img src="images/Screenshot 2025-02-28 18-03-49.png" alt="fix sword" class="smol"><br>
     Yippee!!! I'm gonna make some more minor edits, but you get the gist by now.<br>
     <br>
+    <img src="images/injectFixes3.png" alt="FGS no gap fixes"> <br>
     <img src="images/Screenshot 2025-02-28 09-39-13.png" alt="FGS no gap"> <br>
   </body>
 </html>
