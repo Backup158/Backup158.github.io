@@ -47,15 +47,15 @@ title: Darktide Weapon Customization Edits
       <br>
       You don't have to go this far, but here's is my ultra stripped version with some personal edits.<br>
       <img src="images/CustomPluginEmptyNoHomo.png" alt="strip plugin personal"> <br>
-      First I did all the things I mentioned above, except I also cleared out the inject fixes section. I also cleared out the comments at the top. Then, I modified the <code>if statement</code>> so it exits the program if you're missing requirements. This means fixes are injected OUTSIDE the <code>if then end</code>, so between the two <code>end</code>s.<br>
-      In the regular template, you inject fixes INSIDE the <code>if then end</code>, so before the two <code>end</code>s, because it does the opposite: only execute this code if the requirement is met.<br>
+      First I did all the things I mentioned above, except I also cleared out the inject fixes section. I also cleared out the comments at the top. Then, I modified the <code>if statement</code>> so it exits the program if you're missing requirements. This means fixes are injected OUTSIDE the <code>if then end</code>, so <code>between</code> the two <code>end</code>s.<br>
+      In the regular template, you inject fixes INSIDE the <code>if then end</code>, so <b>before</b> the two <code>end</code>s, because it does the opposite: only execute this code if the requirement is met.<br>
       <br>
     </divPlugin>
     Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
     <img src="images/CustomizationOptions.png" alt="FGS gap 2"> <br>
     <h3 class="ewc">Finding attachment_ids</h3>
     The first step is figuring out <b>which plugin the attachment came from</b> and making note of it the <b>attachment name</b>.<br>
-    &emsp;Generally, the position on the list will tell you which one it's from. It goes <b>base mod --> plugins</b>, in reverse load order.<br>
+    &emsp;Generally, the position on the list will tell you which one it's from. It goes <b>base mod --> plugins</b>, in reverse load order for the plugins.<br>
     &emsp;So if you're using Syn's Edits and the MT plugin, the first options will be from the base mod, then there's the options from the MT plugin, then the options from Syn's plugin. This is because Syn's Edits comes before the MT plugin in the load order.<br>
     &emsp;Some plugins, namely the MT plugin, will have an indicator at the start of the name to clearly distinguish it.<br>
     Now that you know the attachment name and which plugin it's from, you can find the attachment_id. Within each plugin, the displayed name and attachment_id are kept in the same place.<br>
