@@ -42,14 +42,14 @@
   </head>
   <body>
     <h1 class="ewc">Introduction</h1>
-    This is a walkthrough on how to make edits to parts from the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod and any of its plugins for <i>Warhammer 40,000: Darktide</i>. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods of Darktide.<br>
+    This is a walkthrough on how to make edits to parts from the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod and any of its plugins for <i>Warhammer 40,000: Darktide</i>. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods for Darktide.<br>
     <br>
     Firstly, this will be much easier to follow if you understand how EWC moves attachments. One of the best ways to learn is to join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> with the download for the plugin template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
     I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks.
     <h1 class="ewc">Walkthrough</h1>
     Here's a specific example. I equipped this combination of parts on a Force Greatsword; look at that ugly gap!<br>
-    <img src="images/Screenshot 2025-02-28 09-39-57.png" alt="FGS gap 1"><br>
-    This does not spark joy! To fix it, I need to change the position values for the pommel.<br>
+    <img src="images/Screenshot 2025-02-28 09-39-57.png" alt="FGS gap 1" class="smol"><br>
+    This does not spark joy! To fix it, I need to change the position values for the pommel. While I'm at it, I might as well move the hilt down a bit.<br>
     <h2 class="ewc">Injecting Fixes</h2>
     After fixes get injected, the mod searches for the first one that matches (from top down). The base mod and plugins will have their own fixes injected, but these are typically written for broad, generic cases. You could create your own fixes, and there's two options for where to keep them:
     <ol class="ewc">
@@ -69,15 +69,55 @@
     &emsp;So if you're using Syn's Edits and the MT plugin, the first options will be from the base mod, then there's the options from the MT plugin, then the options from Syn's plugin. This is because Syn's Edits comes before the MT plugin in the load order.<br>
     &emsp;Some plugins, namely the MT plugin, will have an indicator at the start of the name to clearly distinguish it.<br>
     Now that you know the attachment name and which plugin it's from, you can find the attachment_id. Within each plugin, the displayed name and attachment_id are kept in the same place.<br>
-    &emsp;For the base mod, this is either in the common files in <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> or deeper, within the individual weapon files in <code>functions/</code>. Note that the weapon names are the names based on the code.<br>
+    &emsp;For the base mod, this is either in the common in <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> or deeper, within the individual weapon files in <code>functions/</code>. Note that the weapon names are the names based on the code. You'll also see individual weapon files in the first folder I mentioned; that's where fixes from the base mod are stored.<br>
     &emsp;For the MT plugin, these are in <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/melee.lua</code> and <code>&lt;Darktide Mods&gt;/weapon_customization_mt_stuff/common/ranged.lua</code>. Other plugins based on this will have a similar structure.<br>
+    &emsp;You could also just use some search methods.
+    <button type="button" class="collapsibleNotSoSmol">Search Methods</button>
+    <divPlugin class="contentNotSoSmol">
+      The easiest way is to search by using <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Drag the folder you want to search into VS Code, then open the search bar by clicking the magnifying glass on the left.<br>
+      <img src="images/searchVSCode1 (another copy).png" alt="vs code"><br>
+      <img src="images/searchVSCode3.png" alt="vs code search"><br>
+      Here's me searching all the files by using the command line
+      <img src="images/FindingAttachmentIdCLI (copy).png" alt="grep"><br>
+    </divPlugin><br>
     Going back to my example, I will start with finding the grip. I see that the name is "Power Sword 4" and it's a base mod attachment, so I'll go look in the weapon_customization mod folder. I go to <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments</code> and see <code>common_melee.lua</code>.<br>
-    <img src="images/FindingAttachmentId1.png" alt="common_melee.lua in the folder"><br>
+    <img src="images/FindingAttachmentId1.png" alt="common_melee.lua in the folder" class="smol"><br>
     Now I'll do a quick search. <br>
     <img src="images/FindingAttachmentId2 (copy).png" alt="Power Sword grip 4"><br>
-    Ah! "power_sword_blade_04" I'll make a note of that. Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01". The pommel isn't in this file, so I'll check the individual weapon file.<br>
-    <img src="images/FindingAttachmentId3.png" alt="forcesword_2h_p1_m1.lua in the folder"><br>
-
+    Ah! "power_sword_blade_04" I'll make a note of that. Now that you have an idea of how it works, I'll find the rest of them in this spoiler: <button type="button" class="collapsible">More manual searching</button>
+    <divPlugin class="content">
+      Doing the same for the hilt, I find that it's "2h_force_sword_hilt_01". I didn't see the pommel in this file, so I'll check the individual weapon files. I didn't find it in either of them, but I did find this:<br>
+      <img src="images/FindingAttachmentId4 (copy).png" alt="pommels are in common"><br>
+      Ok, that means it <i>was</i> in <code>common_melee.lua</code>, just not directly. I'll go back and look deeper.<br>
+      <img src="images/FindingAttachmentId5 (copy).png" alt="pommels in common"><br>
+      This part means that the common melee pommels includes all the pommels from the pommel_attachments table in all of these base files. The ones I've boxed are the most likely ones Therefore, I'll visit <code>&lt;Darktide Mods&gt;/weapon_customization/scripts/mods/weapon_customization/weapon_attachments/functions/</code> and search the suspects. Going through them all, turns out it's in the Crusher file and it's called "2h_power_maul_pommel_03".<br>
+      <img src="images/FindingAttachmentId8 (copy).png" alt="crusher 2h power maul file" class="smol"><br>
+    </divPlugin><br>
+    By now, you have the attachment_ids for all the relevant parts. You can now start actually making fixes.
+    <h3 class="ewc">Creating and Injecting Fixes</h3>
+    Within the <code>weapon_customization_plugin</code> template, you can find an example injection.<br>
+    <img src="images/injectFixes1 (another copy).png" alt="inject fixes"><br>
+    Each weapon will require its own block (the square selection I made). Replace the weapon name, with the relevant weapon, then in the dependencies, put the relevant attachments. Separation by comma outside quotes means AND, having ! at the start means NOT, and being separated by | while inside quotes means OR.<br>
+    My Force Greatsword was using "power_sword_blade_04" AND "2h_force_sword_hilt_01" AND "2h_power_maul_pommel_03", so that's what I'll put in the dependencies. The change in spacings doesn't matter.<br>
+    <img src="images/injectFixes2.png" alt="inject fixes example"><br>
+    I've also initialized the fixes with some default values. It's actually best if you make it slightly different for each line, but I'll do it this way to show why. Here's the code for easy copy pasting:<br>
+    &emsp;<code>{ position = vector3_box(0.0, 0.0, 0.0), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.0, 1.0, 1.0)},</code><br>
+    Alright, so how do you actually find out the values to put? If you're crazy, you could find the original fix values then purely mentally calculate the effects of each change. I don't know about you, but I am <i>not</i> built like that.<br>
+    Instead, I'll use the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a> to figure it out. Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord. Why is it not on Nexus? I don't know.<br>
+    Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool.<br>
+    <img src="images/Screenshot 2025-02-28 17-44-43.png" alt="zeroed out sword" class="smol"><br>
+    That looks even worse, but that will change. Click on one of the pieces and start moving it around. Make note of the number that shows up.<br>
+    <img src="images/Screenshot 2025-02-28 17-45-27.png" alt="zeroed out sword" class="smol"><br>
+    That pommel looks much better! But why is there blob of options that I can't select properly? These are all parented to the same slot, so changes to the parent get inherited by the children. In this case, all the blade, hilt, and pommel and parented to the grip. This is why it's best to make the default values slightly different for each slot.<br>
+    <br>
+    As a quirk of Modding Tools, you can't move the hilt if you can't click on it past the grip. So go back to the injected fixes, then change the position for the hilt by some arbitrary value (as an example, I made its position <code>(0.0, 0.2, 0.0)</code>). Go back to the game, close the inventory, reload mods through developer mode (or restart), then reopen it.<br>
+    <img src="images/Screenshot 2025-02-28 17-53-22.png" alt="tilted out sword" class="smol"><br>
+    ...Even uglier but now I can actually click things! Plus, now I know the blade is actually parented to the hilt. I'll get that out of the way, then move the hilt to where I want it. Once it looks right, I'll copy over the values to the plugin. Do this for all relevant parts.<br>
+    <img src="images/Screenshot 2025-02-28 17-53-56 a.png" alt="copy fixes" class="notSoSmol"><br>
+    Now close the inventory, reload or restart, and come back.<br>
+    <img src="images/Screenshot 2025-02-28 18-03-49.png" alt="fix sword" class="smol"><br>
+    Yippee!!! I'm gonna make some more minor edits, but you get the gist by now.<br>
+    <br>
     <img src="images/Screenshot 2025-02-28 09-39-13.png" alt="FGS no gap"> <br>
   </body>
 </html>
@@ -124,14 +164,35 @@
         outline: none;
         font-size: 15px;
       }
+      .collapsibleNotSoSmol {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px 18px 18px 18px;
+        max-width: 60%;
+        border: none;
+        text-align: center;
+        outline: none;
+        font-size: 15px;
+      }
       
       /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
       .active, .collapsible:hover {
         background-color: #ccc;
       }
+      .active, .collapsibleNotSoSmol:hover {
+        background-color: #ccc;
+      }
       
       /* Style the collapsible content. Note: hidden by default */
       .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+      } 
+      .contentNotSoSmol {
+        max-width: 60%;
         padding: 0 18px;
         display: none;
         overflow: hidden;
@@ -155,23 +216,52 @@
       .ewc {
         margin-bottom: 8px;
       }
+
+      .notSoSmol {
+        max-width: 60%;
+        max-height: 100%;
+      } 
+      .smol {
+        max-width: 40%;
+        max-height: 100%;
+      } 
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      } 
     </style>
     
     <script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-    
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
-        }
-      });
-    }
-</script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+      
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+    <script>
+      var coll = document.getElementsByClassName("collapsibleNotSoSmol");
+      var i;
+      
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
   </body>
 </html>
