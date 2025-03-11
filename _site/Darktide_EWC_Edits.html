@@ -55,7 +55,7 @@
         I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks. To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> containing the template archive.</li>
       <li>[Optional] Go to Mod Options --> Darktide Mod Framework --> Enable Developer Mode. This will let you reload mods (and see your fixes) without having to close the game. By default, you reload mods using <code>Ctrl + Shift + R</code>.</li>
     </ol>
-    <h1>Walkthrough</h1>
+    <h1 id="example">Walkthrough</h1>
     Here's a specific example. I equipped this combination of parts on a Force Greatsword; look at that ugly gap!<br>
     <img src="images/SwordGap1.png" alt="FGS gap 1" class="smol"><br>
     This does not spark joy! To fix it, I need to change the position values for the pommel. While I'm at it, I might as well move the hilt down a bit.<br>
@@ -86,7 +86,7 @@
     </divPlugin>
     Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
     <img src="images/CustomizationOptions.png" alt="FGS gap 2"> <br>
-    <h3>Finding attachment_ids</h3>
+    <h3 id="finding-attachment-ids">Finding attachment_ids</h3>
     The first step is figuring out <b>which plugin the attachment came from</b> and making note of it the <b>attachment name</b>.<br>
     &emsp;Generally, the position on the list will tell you which one it's from. It goes <b>base mod --> plugins</b>, in reverse load order for the plugins.<br>
     &emsp;E.g. if you're using Syn's Edits and the MT plugin, the first options will be from the base mod, then there's the options from the MT plugin, then the options from Syn's plugin. This is because Syn's Edits comes before the MT plugin in the load order.<br>
@@ -150,7 +150,7 @@
     <img src="images/CustomPlugin.png" alt="plugin personal final"> <br>
     <img src="images/SwordGap2.png" alt="FGS no gap"> <br>
 
-    <h1>Aligning Sights</h1>
+    <h1 id="aligning-sights">Aligning Sights</h1>
     Aligning sights works the same way, but the slot name for the fixes is different. Instead of saying <code>sight = postion xyz</code>, you would use <code>scope_offset = position xyz</code> or <code>no_scope_offset = position xyz</code>. You don't need to know the difference; you can just have both and copy over the values. From now on, I'll refer to both simply as 'scope offsets'. If you want to know:<button type="button" class="collapsible">Scopes Classification</button>
     <divPlugin class="content">
       Which one you use depends on if the sight is technically classified as a scope by the plugin. This is determined by if it's present in the <code>sights</code> table in the base mod. Plugins can insert their scopes into this table, so the base mod can apply scope effects, such as making lenses disappear and adding zoom.<br>
@@ -158,7 +158,8 @@
     </divPlugin><br>
     While the transformations follow the same format, it's a little unintuitive at first. The <code>scope_offset</code> transformations still apply to the weapon itself, <bold>not</bold> the point of aim. The actual point of aim stays in the middle of your screen; <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/253">Crosshair Remap</a> is useful as a point of reference.<br>
     <br>
-    So if the scope is too high, you need to make the gun down. This means pushing the Y position further negative. For scope offsets, consult the following tables. Read it as "When you make the value for heading more positive, this happens to the gun." For example, look at the Position table. In the final column, that is Y. As you make Y positive, the gun moves up.
+    So if the scope is too high, you need to make the gun down. This means pushing the Y position further negative. <br>
+    Consult the following tables. Read it as "When you make the value for heading more positive, this happens to the gun." For example, look at the Position table. In the final column, that is Y. As you make Y positive, the gun moves up.
     <table>
       <tr>
         <th colspan="4"><b>Position</b></th>
@@ -189,7 +190,7 @@
       <tr>
         <td>+</td>
         <td>?</td>
-        <td>Right</td>
+        <td>Tip goes right</td>
         <td>Tip goes up</td>
       </tr>
     </table> 
