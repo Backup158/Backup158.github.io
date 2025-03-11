@@ -29,6 +29,8 @@
           
             <li><a class="" href="/Darktide_EWC_Edits.html">Darktide Weapon Customization Edits</a></li>
           
+            <li><a class="" href="/NexusModsTricks.html">Nexus Mods Features</a></li>
+          
         </ul>
       
     </nav>
@@ -41,7 +43,13 @@
     This is written with you having read that in mind, but just spelling out things for the slow people (me).<br>
     Having installed the prerequisites and cloned the repo, go to the local directory for the repo. Open the terminal there.<br>
     To run Jekyll, you need a Gemfile. Create it, such as through `touch Gemfile`, then add `gem 'jekyll'` to add that as a dependency.<br>
-    The rest of the instructions are clear as is. 
+    The rest of the instructions are clear as is.<br>
+    <br>
+    <i>Buuuuut</i> for ease of copy pasting >:3<br>
+    <code>
+      bundle exec jekyll serve
+      http://localhost:4000
+    </code>
     </p>
     <h2>Linking Pages</h2>
     <ul>
@@ -142,18 +150,6 @@
       body {
         padding-left: 36px;
         padding-right: 36px;
-      }
-
-      /* Making the list in ewc edits page less spaced out */
-      .ewc ol {
-        margin: 2px;
-      }
-      .ewc ol li {
-        margin: 2px;
-      }
-      /* I don't like how spaced out the titles are */
-      .ewc {
-        margin-bottom: 8px;
       }
 
       .notSoSmol {
