@@ -24,7 +24,7 @@ title: Darktide Weapon Customization Edits
       <li>[Optional] Go to Mod Options --> Darktide Mod Framework --> Enable Developer Mode. This will let you reload mods (and see your fixes) without having to close the game. By default, you reload mods using <code>Ctrl + Shift + R</code>.</li>
     </ol>
     <h1 id="example">Walkthrough</h1>
-    Here's a specific example. I equipped this combination of parts on a Force Greatsword; look at that ugly gap!<br>
+    Here's a specific example. I equipped this combination of parts on a Force Greatsword, and there's a big gap at the bottom.<br>
     <img src="images/SwordGap1.png" alt="FGS gap 1" class="smol"><br>
     This does not spark joy! To fix it, I need to change the position values for the pommel. While I'm at it, I might as well move the hilt down a bit.<br>
     <h2>Injecting Fixes</h2>
@@ -33,7 +33,7 @@ title: Darktide Weapon Customization Edits
       <li>Directly in one of the plugins</li>
       <li>In your own fixes-only plugin</li>
     </ol>
-    I would ONLY put the fixes in one of the plugins if it's a simple, one-time thing and you're willing to risk losing it if you forget to transfer it over after the mod author update the plugin. You can quickly make a custom plugin using the template; I'll elaborate in this collapsed section. In my example screenshots, I'll be doing it through a separate plugin, but the general idea is the same. 
+    I would ONLY put the fixes in one of the plugins if it's a simple, one-time thing and you're willing to risk losing it (if you forget to transfer it over after the plugin gets updated). You can quickly make a custom plugin using the template; I'll elaborate in this collapsed section. In my example screenshots, I'll be doing it through a separate plugin, but the general idea is the same. 
     <button type="button" class="collapsible">Making a basic plugin</button>
     <divPlugin class="content">
       Easiest way to do this is to copy over the template and strip it. Install the template as if it was a mod, then descend into the folders. Delete the <code>copy.cmd</code> script since you don't need that.<br>
@@ -43,13 +43,16 @@ title: Darktide Weapon Customization Edits
       <img src="images/StripPlugin3.png" alt="strip plugin"> <br>
       Feel free to change the name, but keep in mind that you'll need to rename the folders, the .mod and .lua files, and any mentions of the name within those files.<br>
       <br>
-      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code structure).<br>
+      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code formatting).<br>
       I put this file below the main plugin but above the other plugins. It needs to be below the main plugin so that can create its anchor tables (which you're injecting into) first.<br>
       <br>
       You don't have to go this far, but here's is my ultra stripped version with some personal edits.<br>
-      <img src="images/CustomPluginEmptyNoHomo.png" alt="strip plugin personal"> <br>
-      First I did all the things I mentioned above, except I also cleared out the inject fixes section. I also cleared out the comments at the top. Then, I modified the <code>if statement</code>> so it exits the program if you're missing requirements. This means fixes are injected OUTSIDE the <code>if then end</code>, so <code>between</code> the two <code>end</code>s.<br>
-      In the regular template, you inject fixes INSIDE the <code>if then end</code>, so <b>before</b> the two <code>end</code>s, because it does the opposite: only execute this code if the requirement is met.<br>
+      <button type="button" class="collapsible">Personal Edits</button>
+      <divPlugin class="content">
+        <img src="images/CustomPluginEmptyNoHomo.png" alt="strip plugin personal"> <br>
+        First I did all the things I mentioned above, except I also cleared out the inject fixes section. I also cleared out the comments at the top. Then, I modified the if statement so it exits the program if you're missing requirements. This means fixes are injected OUTSIDE the <code>if then ... end</code> stucture, so <b>between</b>> the two <code>end</code>s.<br>
+        In the regular template, you inject fixes INSIDE the <code>if then end</code>, so <b>before</b> the two <code>end</code>s, because it does the opposite: only execute this code if the requirement is met.<br>
+      </divPlugin>
       <br>
     </divPlugin>
     Alright, now that you have a place to put the fixes, you need to actually make them. This starts with finding out which combination of parts you're using, then getting the attachment_id for each. Here's the customization options I chose for that Force Greatsword; I'm interested in the grip, pommel, and hilt. <br>
@@ -90,18 +93,24 @@ title: Darktide Weapon Customization Edits
     <h3>Creating and Injecting Fixes</h3>
     Within the <code>weapon_customization_plugin</code> template, you can find an example injection.<br>
     <img src="images/injectFixes1.png" alt="inject fixes"><br>
-    Each weapon will require its own block (the square selection I made). Replace the weapon name, with the relevant weapon, then in the dependencies, put the relevant attachments. Separation by comma outside quotes means AND, having ! at the start means NOT, and being separated by | while inside quotes means OR.<br>
-    My Force Greatsword was using "power_sword_grip_04" AND "2h_force_sword_hilt_01" AND "2h_power_maul_pommel_03", so that's what I'll put in the dependencies. The change in spacings doesn't matter.<br>
+    Each weapon will require its own block (the square selection I made). Replace the weapon name, with the relevant weapon, then in the dependencies, put the relevant attachments. The rules for specifying dependencies are as follows:
+    <ul class="ewcSmol">
+      <li class="ewcSmol">Separation by a comma <code>,</code> <i>outside</i> quotes means AND</li>
+      <li class="ewcSmol">Having an exclamation mark <code>!</code> at the start <i>inside</i> quotes means NOT</li>
+      <li class="ewcSmol">Being separated by a pipe <code>|</code> inside quotes means OR</li>
+    </ul>
+    Going back to the image, you can see that the first example means "Apply these rail fixes if using 'auto_pistol_sight_01' AND NOT 'receiver_01'" <br>
+    My Force Greatsword was using "power_sword_grip_04" AND "2h_force_sword_hilt_01" AND "2h_power_maul_pommel_03", so that's what I'll put in the dependencies. Putting them on separate lines instead of one line doesn't matter. What does matter is that they're in quotes and separated by commas.<br>
     <img src="images/injectFixes2.png" alt="inject fixes example"><br>
     If you're piggybacking off of an existing plugin, copy over the fixes WITHOUT the <code>table.prepend</code> stuff. Here is an example with the MT Plugin (and it's in the Devil's Claw Sword file but shush)<br>
     <img src="images/injectFixesMT.png" alt="inject fixes example MT"><br>
     I've also initialized the fixes with some default values. It's actually best if you don't use 0 for everything, but I'll do it this way to show why. Here's the (good) code for easy copy pasting:<br>
-    &emsp;<code>{ position = vector3_box(0.0, 0.0, 0.01), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.0, 1.0, 1.0)},</code><br>
-    Alright, so how do you actually find out the values to put? If you're crazy, you could find the original fix values then calculate the effects of each change purely through your mind. I don't know about you, but I am <i>not</i> built like that. For mortals, this is where Modding Tools comes in.<br>
+    &emsp;<code>{ position = vector3_box(0.0, 0.0, 0.01), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.0, 1.0, 1.0) },</code><br>
+    Alright, so how do you actually find out the values to put? If you're crazy, you could find the original fix values then calculate the effects of each change purely through your mind. I don't know about you, but I am <i>not</i> built like that. For us mere mortals, this is where Modding Tools comes in.<br>
     <br>
-    Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool.<br>
+    Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool. You can see it at the bottom of the screen. By default, it's the 'o' button.<br>
     <img src="images/MakingFixes1.png" alt="zeroed out sword" class="smol"><br>
-    That looks even worse, but that will change. Click on one of the pieces and start moving it around. Make note of the number that shows up.<br>
+    That looks even worse with zeroed out values, but that will soon change. Click on one of the pieces and start moving it around by dragging the axis arrows in a direction. Make note of the numbers that show up under <b>Local</b>. In this case, I'm interested in the numbers on the <b>Position</b> line.<br>
     <img src="images/MakingFixes2.png" alt="zeroed out sword blob" class="smol"><br>
     That pommel looks much better! But wait! Why is there blob of options that I can't select properly? These are all parented to the same slot, so changes to the parent get inherited by the children. In this case, the blade, hilt, and pommel are all parented to the grip. This is why it's best to make the default values not just zeros throughout.<br>
     <br>
@@ -119,10 +128,12 @@ title: Darktide Weapon Customization Edits
     <img src="images/SwordGap2.png" alt="FGS no gap"> <br>
 
     <h1 id="aligning-sights">Aligning Sights</h1>
-    Aligning sights works the same way, but the slot name for the fixes is different. Instead of saying <code>sight = postion xyz</code>, you would use <code>scope_offset = position xyz</code> or <code>no_scope_offset = position xyz</code>. You don't need to know the difference; you can just have both and copy over the values. From now on, I'll refer to both simply as 'scope offsets'. If you want to know:<button type="button" class="collapsible">Scopes Classification</button>
+    Aligning sights works the same way, but the slot name for the fixes is different. Instead of saying <code>sight = postion xyz</code>, you would use <code>scope_offset = position xyz</code> or <code>no_scope_offset = position xyz</code>. You don't need to know the difference; you can just have both and copy over the values, or use trial and error. From now on, I'll refer to both simply as 'scope offsets'. If you want to know:<button type="button" class="collapsible">Scopes Classification</button>
     <divPlugin class="content">
-      Which one you use depends on if the sight is technically classified as a scope by the plugin. This is determined by if it's present in the <code>sights</code> table in the base mod. Plugins can insert their scopes into this table, so the base mod can apply scope effects, such as making lenses disappear and adding zoom.<br>
-      For attachments that are in <code>wc.sights</code>, you would use <code>scope_offset</code>.
+      Forget this section. I found too many exceptions that I don't even know anymore lol. Most things just use <code>scope_offset</code><br>
+      ---------<br>
+      Which one you use depends on if the sight is technically classified as a scope by the plugin. This is determined by if the attachment's primary part is present in the <code>scopes</code> and if the attachment is in the <code>sights</code> tables from the base mod. This tells the base mod to apply scope effects, such as making lenses disappear and adding zoom.<br>
+      For attachments that are in <code>wc.sights</code>, you would use <code>scope_offset</code>.<br>
     </divPlugin><br>
     While the transformations follow the same format, it's a little unintuitive at first. The <code>scope_offset</code> transformations still apply to the weapon itself, <bold>not</bold> the point of aim. The actual point of aim stays in the middle of your screen; <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/253">Crosshair Remap</a> is useful as a point of reference.<br>
     <br>
@@ -162,5 +173,16 @@ title: Darktide Weapon Customization Edits
         <td>Tip goes up</td>
       </tr>
     </table> 
+    To test this, I recommend reloading mods in the Psykhanium. The process generally goes like this:
+    <ol>
+      <li>Enter the Psykhanium</li>
+      <li>Aim down sights</li>
+      <li>Note how far off the point of aim is, then estimate a change</li>
+      <li>Make the change in your fixes file</li>
+      <li>Reload mods</li>
+      <li>Open and close the inventory to refresh your weapon (to apply the new fixes you made)</li>
+      <li>Go back to Step 2</li>
+    </ol>
+    This way, you only have to wait for a loading screen once (until you inevitably crash due to memory leaks from constantly reloading)
   </body>
 </html>
