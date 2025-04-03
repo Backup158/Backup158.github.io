@@ -1,5 +1,5 @@
 toc:
-  - title: Documentation Repositories
+  - title: Documentation and Repositories
     subfolderitems:
       - page: Desktop Startup Process
         url: /StartupProcess/
@@ -12,7 +12,7 @@ toc:
       - page: GitHub Pages
         url: /PagesDocumentation.html
         description: Some documentation for working with GitHub Pages
-  - title: Modding Documentation
+  - title: Modding
     subfolderitems:
       - page: HD2MM on Linux
         url: /HD2MM_Linux.html
