@@ -5,12 +5,15 @@
     <title>Nexus Mods Features</title>
   </head>
   <body>
+    <!-- Navigation Bar -->
     <button type="button" class="collapsible">Navigation</button>
     <nav class="content">
       <h3 class="navbarHeader"><a href="/index.html">Home</a></h3>
+      <!-- Sections -->
       
         <h3 class="navbarHeader">Documentation Repositories</h3>
         <ul>
+          <!-- Entries per Section -->
           
             <li><a class="" href="/StartupProcess/">Desktop Startup Process</a></li>
           
@@ -24,12 +27,15 @@
       
         <h3 class="navbarHeader">Modding Documentation</h3>
         <ul>
+          <!-- Entries per Section -->
           
             <li><a class="" href="/HD2MM_Linux.html">HD2MM on Linux</a></li>
           
             <li><a class="" href="/Darktide_EWC_Edits.html">Darktide Weapon Customization Edits</a></li>
           
             <li><a class=" active" href="/NexusModsTricks.html">Nexus Mods Features</a></li>
+          
+            <li><a class="" href="/GladiusMods/">Gladius Mods</a></li>
           
         </ul>
       
@@ -38,7 +44,7 @@
 <html>
   <body>
     <h1>Streamlined Process to Find Mod Updates</h1>
-    For users who won't/can't use a mod manager that automatically checks for updates, you should make use of Nexus's Download History page. On this page, you can filter results by game and sort them by last updated. <br>
+    For users who won't/can't use a mod manager that automatically checks for updates, you should make use of Nexus's <a href="https://www.nexusmods.com/users/myaccount?tab=download+history">Download History page</a>. On this page, you can filter results by game and sort them by last updated. <br>
     <img src="images/nexus download history 1.png" alt="dl history 1"> <br>
     <img src="images/nexus download history 2-3.png" alt="dl history 2"> <br>
     <br>
@@ -51,7 +57,29 @@
 </html>
 
 
+    <!-- CSS Styling Below -->
+
     <style>
+      /* Dark Mode */
+      /* Globals for text and background color. Defaults to Dark */
+      :root {
+        --color-text: rgb(255, 255, 255);
+        --color-background: rgb(27, 40, 56);
+      }
+      /* Conditional styling */
+      @media (prefers-color-scheme: light) {
+        /* Re-assign previous variables */
+        :root {
+          --color-text: rgb(0, 0, 0);
+          --color-background: rgb(255, 254, 205); /* Kinda piss colored */
+        }
+      }
+      /* Assign variables to page color and background */
+      body {
+        color: var(--color-text);
+        background-color: var(--color-background);
+      }
+
       nav ul {
         display: flex;
         list-style: "> ";

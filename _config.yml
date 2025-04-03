@@ -2,7 +2,7 @@ url: "https://backup158.github.io/" # the base hostname & protocol for your site
 plugins:
   - jekyll-sitemap
   - jekyll-relative-links
-theme: jekyll-theme-minimal
+markdown: GFM
 relative_links:
   enabled: true
   collections: true
