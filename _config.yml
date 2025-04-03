@@ -1,3 +1,17 @@
 url: "https://backup158.github.io/" # the base hostname & protocol for your site
 plugins:
   - jekyll-sitemap
+  - jekyll-relative-links
+theme: jekyll-theme-minimal
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - CONTRIBUTING.md
+  - README.md
+  - LICENSE.md
+  - COPYING.md
+  - CODE_OF_CONDUCT.md
+  - CONTRIBUTING.md
+  - ISSUE_TEMPLATE.md
+  - PULL_REQUEST_TEMPLATE.md

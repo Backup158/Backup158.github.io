@@ -11,6 +11,7 @@ toc:
         url: /BashScripts/
       - page: GitHub Pages
         url: /PagesDocumentation.html
+        description: Some documentation for working with GitHub Pages
   - title: Modding Documentation
     subfolderitems:
       - page: HD2MM on Linux
@@ -24,3 +25,4 @@ toc:
         description: Showcasing some (surprisely little known) features on Nexus Mods
       - page: Gladius Mods
         url: /GladiusMods/
+        description: Links to my Gladius mods on Steam Workshop

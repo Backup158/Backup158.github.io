@@ -5,12 +5,15 @@
     <title>{{ page.title }}</title>
   </head>
   <body>
+    <!-- Navigation Bar -->
     <button type="button" class="collapsible">Navigation</button>
     <nav class="content">
       <h3 class="navbarHeader"><a href="/index.html">Home</a></h3>
+      <!-- Sections -->
       {% for item in site.data.navigation.toc %}
         <h3 class="navbarHeader">{{ item.title }}</h3>
         <ul>
+          <!-- Entries per Section -->
           {% for entry in item.subfolderitems %}
             <li><a class="{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url }}">{{ entry.page }}</a></li>
           {% endfor %}
@@ -18,6 +21,8 @@
       {% endfor %}
     </nav>
     {{ content }}
+
+    <!-- CSS Styling Below -->
 
     <style>
       nav ul {
