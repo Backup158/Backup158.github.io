@@ -1,9 +1,11 @@
 url: "https://backup158.github.io/" # the base hostname & protocol for your site
+remote_theme: pages-themes/midnight@v0.2.0
 plugins:
   - jekyll-sitemap
   - jekyll-relative-links
+  - jekyll-remote-theme
 markdown: GFM
-theme: jekyll-theme-midnight
+plugins:
 relative_links:
   enabled: true
   collections: true
