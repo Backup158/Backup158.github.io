@@ -5,7 +5,6 @@ plugins:
   - jekyll-relative-links
   - jekyll-remote-theme
 markdown: GFM
-plugins:
 relative_links:
   enabled: true
   collections: true
