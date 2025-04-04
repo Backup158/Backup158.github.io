@@ -3,6 +3,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-relative-links
 markdown: GFM
+theme: jekyll-theme-midnight
 relative_links:
   enabled: true
   collections: true
