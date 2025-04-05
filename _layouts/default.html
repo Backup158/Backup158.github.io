@@ -32,6 +32,8 @@
         --color-background: rgb(27, 40, 56);
         --color-collapsible-content-background: #3f6391;
         --color-clicked-button-background: #ccc;
+        --color-hyperlink: #86d37a;
+        --color-hyperlink-clicked: #e18bbc;
       }
       /* Conditional styling */
       @media (prefers-color-scheme: light) {
@@ -137,6 +139,14 @@
         background: #2b2b2b;
         font-size: 125%;
         padding: 4px;
+      }
+
+      /* Hyperlink Colors */
+      a:link {
+        color: var(--color-hyperlink);
+      }
+      a:visited {
+        color: var(--color-hyperlink-clicked);
       }
 
       /* Gives body some left padding so it's not all cramped */
