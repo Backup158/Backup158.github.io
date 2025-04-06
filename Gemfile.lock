@@ -29,8 +29,6 @@ GEM
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
       webrick (>= 1.0)
-    jekyll-relative-links (0.6.1)
-      jekyll (>= 3.3, < 5.0)
     jekyll-remote-theme (0.4.3)
       addressable (~> 2.0)
       jekyll (>= 3.5, < 5.0)
@@ -38,6 +36,8 @@ GEM
       rubyzip (>= 1.3.0, < 3.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
+    jekyll-seo-tag (2.8.0)
+      jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
@@ -78,8 +78,8 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll
-  jekyll-relative-links
   jekyll-remote-theme
+  jekyll-seo-tag
   jekyll-sitemap
 
 BUNDLED WITH

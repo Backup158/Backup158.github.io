@@ -43,7 +43,7 @@
     <body>
 <h1 class="bodyContent">Welcome</h1>
 <p class="bodyContent">Welcome to City 17. </p>
-<img src="images/Breencast_first_full.jpg" alt="Dr. Wallace Breen"> <br>
+<img src="assets/images/Breencast_first_full.jpg" alt="Dr. Wallace Breen"> <br>
 <h1 class="bodyContent">Navigation</h1>
 <p class="bodyContent">Links to notes from this site and to the <code>README</code> files for my other repositories.<br>
   You can only navigate back to this home page through the browser controls (no return links on the pages); I want to keep these isolated from the rest of this site's pages.
@@ -65,6 +65,8 @@
         --color-background: rgb(27, 40, 56);
         --color-collapsible-content-background: #3f6391;
         --color-clicked-button-background: #ccc;
+        --color-hyperlink: #86d37a;
+        --color-hyperlink-clicked: #e18bbc;
       }
       /* Conditional styling */
       @media (prefers-color-scheme: light) {
@@ -170,6 +172,14 @@
         background: #2b2b2b;
         font-size: 125%;
         padding: 4px;
+      }
+
+      /* Hyperlink Colors */
+      a:link {
+        color: var(--color-hyperlink);
+      }
+      a:visited {
+        color: var(--color-hyperlink-clicked);
       }
 
       /* Gives body some left padding so it's not all cramped */

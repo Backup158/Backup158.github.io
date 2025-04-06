@@ -45,13 +45,13 @@
   <body>
     <h1>Streamlined Process to Find Mod Updates</h1>
     For users who won't/can't use a mod manager that automatically checks for updates, you should make use of Nexus's <a href="https://www.nexusmods.com/users/myaccount?tab=download+history">Download History page</a>. On this page, you can filter results by game and sort them by last updated. <br>
-    <img src="images/nexus download history 1.png" alt="dl history 1"> <br>
-    <img src="images/nexus download history 2-3.png" alt="dl history 2"> <br>
+    <img src="assets/images/nexus download history 1.png" alt="dl history 1"> <br>
+    <img src="assets/images/nexus download history 2-3.png" alt="dl history 2"> <br>
     <br>
     <h1>Mod Requirements Section</h1>
     In the mod description, there is a collapsed section linking all required mods. You can expand it by clicking the area depicted in the image, circled in pink.<br>
     There is also a section automatically linking all other mods that require this one. This is very useful when you're on the page for a framework mod, for example. Boxed in the picture, you can see the Darktide Extended Weapon Customization mod has a few other mods that require it.<br>
-    <img src="images/nexus requirements.png" alt="requirements 1"> <br>
+    <img src="assets/images/nexus requirements.png" alt="requirements 1"> <br>
 
   </body>
 </html>
@@ -67,6 +67,8 @@
         --color-background: rgb(27, 40, 56);
         --color-collapsible-content-background: #3f6391;
         --color-clicked-button-background: #ccc;
+        --color-hyperlink: #86d37a;
+        --color-hyperlink-clicked: #e18bbc;
       }
       /* Conditional styling */
       @media (prefers-color-scheme: light) {
@@ -172,6 +174,14 @@
         background: #2b2b2b;
         font-size: 125%;
         padding: 4px;
+      }
+
+      /* Hyperlink Colors */
+      a:link {
+        color: var(--color-hyperlink);
+      }
+      a:visited {
+        color: var(--color-hyperlink-clicked);
       }
 
       /* Gives body some left padding so it's not all cramped */

@@ -17,7 +17,8 @@ title: Darktide Weapon Customization Edits
     <ol>
       <li>Any text editor, preferably one with syntax highlighting. Notepad will work in a pinch, but programs such as Notepad++ or <a href="https://code.visualstudio.com/">Visual Studio Code</a> are much more powerful.</li>
       <li><a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a>. This adds a menu that lets you move each attachment and see the changes live.<br>
-        Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord. Why is it not on Nexus? I don't know.</li>
+        Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord. Why is it not on Nexus? I don't know.<br>
+        I have a <a href="https://youtu.be/e4QcBg96gR8">quick demo video</a> for using it.</li>
       <li>The <code>weapon_customization_plugin</code> template. Grasmann left a lot of notes in this plugin explaining what flags exist for making parts.<br>
         Even if you don't read this, it's needed for one of the methods for injecting fixes.<br>
         I'll let you go through this yourself, but the tl;dr is that each attachment has an id you give it and a mesh/model taken from the game, and equipping an attachment in a slot in the customization menu causes the mod to search for injected fixes that match the ids of any equipped attachment, which affects how the attachment looks. To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> containing the template archive.</li>
@@ -109,6 +110,10 @@ title: Darktide Weapon Customization Edits
     Alright, so how do you actually find out the values to put? If you're crazy, you could find the original fix values then calculate the effects of each change purely through your mind. I don't know about you, but I am <i>not</i> built like that. For us mere mortals, this is where Modding Tools comes in.<br>
     <br>
     Anyways, go back into the game and get to work. Open the cosmetics menu for your weapon, then press the button to Use Modding Tool. You can see it at the bottom of the screen. By default, it's the 'o' button.<br>
+    <button type="button" class="collapsible">Modding Tools Quick Demo</button>
+    <divPlugin class="content">
+      <iframe width="100%" height="900px" src="https://www.youtube.com/embed/e4QcBg96gR8"> </iframe> 
+    </divPlugin><br>
     <img src="assets/images/MakingFixes1.png" alt="zeroed out sword" class="smol"><br>
     That looks even worse with zeroed out values, but that will soon change. Click on one of the pieces and start moving it around by dragging the axis arrows in a direction. Make note of the numbers that show up under <b>Local</b>. In this case, I'm interested in the numbers on the <b>Position</b> line.<br>
     <img src="assets/images/MakingFixes2.png" alt="zeroed out sword blob" class="smol"><br>
@@ -186,5 +191,6 @@ title: Darktide Weapon Customization Edits
       <li>Go back to Step 2</li>
     </ol>
     This way, you only have to wait for a loading screen once (until you inevitably crash due to memory leaks from constantly reloading)
+    <iframe width="100%" height="900px" src="https://www.youtube.com/embed/jU66dxB9oZU "> </iframe> 
   </body>
 </html>
