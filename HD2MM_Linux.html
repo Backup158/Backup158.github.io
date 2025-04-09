@@ -1,19 +1,20 @@
 ---
 layout: default
-title: HD2MM on Linux
+title: HD2 Modding on Linux
 ---
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="description" content="Running Helldivers 2 Mod Manager on Linux">
     <meta name="keywords" content="helldivers, helldivers 2, hd2mm, hd2modmanager, mod manager, linux, proton">
-    <title>HD2MM on Linux</title>
+    <title>HD2 Modding on Linux</title>
   </head>
   <body>
     <h1>Introduction</h1>
-    This is a walkthrough on how to use <a href="https://www.nexusmods.com/helldivers2/mods/109">Helldivers 2 Mod Manager</a> (HD2MM) on Linux by using Steam and Proton. The <a href="https://github.com/teutinsa/Helldivers2ModManager">GitHub repository</a><br>
-    I'm assuming you have a cursory knowledge of filesystems and unzipping files.
-    <h1>Installation</h1>
+    This is a walkthrough on how to get various modding tools to work on Linux by using Steam and Proton.<br>
+    I'm assuming you have a cursory knowledge of filesystems and unzipping files. <br>
+    These are not the only methods that work! There are a few ways to get this running, but these are the ways that worked for me.
+    <h1><a href="https://www.nexusmods.com/helldivers2/mods/109">Helldivers 2 Mod Manager</a> - HD2MM - <a href="https://github.com/teutinsa/Helldivers2ModManager">(GitHub)</a></h1>
     <ol>
         <li>Download HD2MM and unzip it somewhere</li>
         <li>Open Steam and add HD2MM as a non-Steam game</li>
@@ -37,5 +38,19 @@ title: HD2MM on Linux
     <img src="https://github.com/user-attachments/assets/e8424467-a3bd-4a29-8868-ca5a8492bce6" alt="hd2mm file path">
     <br>
     From this point on, follow the regular guides on how to use HD2MM.
+
+    <h1><a href="https://github.com/Boxofbiscuits97/HD2SDK-CommunityEdition/releases/latest">HD2 Community SDK</a> for Blender</h1>
+    When running Blender natively, trying to add the SDK will throw a <code>missing HDTool_Helper</code> error
+    <ol>
+      <li>Install <a href="https://store.steampowered.com/app/365670/Blender/">Blender through Steam</a></li>
+      <li>Setup Proton for Blender</li>
+            <ol>
+                <li>In your Steam Library, right click Blender</li>
+                <li>Click Properties</li>
+                <li>In the menu on the left, click Compatibility</li>
+                <li>Click Force the use of a specific Steam Play compatibility tool</li>
+                <li>Select a Proton version (I use Proton 9.0-4 for no reason)</li>
+            </ol>
+    </ol>
   </body>
 </html>

@@ -14,9 +14,9 @@ toc:
         description: Some documentation for working with GitHub Pages
   - title: Modding
     subfolderitems:
-      - page: HD2MM on Linux
+      - page: HD2 Modding on Linux
         url: /HD2MM_Linux.html
-        description: Running Helldivers 2 Mod Manager on Linux
+        description: Running Helldivers 2 Modding Tools on Linux
       - page: Darktide Weapon Customization Edits
         url: /Darktide_EWC_Edits.html
         description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod
