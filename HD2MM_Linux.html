@@ -40,10 +40,18 @@ title: HD2 Modding on Linux
     From this point on, follow the regular guides on how to use HD2MM.
 
     <h1><a href="https://github.com/Boxofbiscuits97/HD2SDK-CommunityEdition/releases/latest">HD2 Community SDK</a> for Blender</h1>
-    When running Blender natively, trying to add the SDK will throw a <code>missing HDTool_Helper</code> error <br>
-    All releases of Blender can be found <a href="https://download.blender.org/release/">here</a>
+    When running Blender natively, trying to add the SDK will throw a <code>missing HDTool_Helper</code> error. <br>
+    All releases of Blender can be found <a href="https://download.blender.org/release/">here</a>, but you don't need that for this method.
     <ol>
-      <li>Install <a href="https://store.steampowered.com/app/365670/Blender/">Blender through Steam</a> nvm this is bs because it installs 4.4</li>
+      <li>Install <a href="https://store.steampowered.com/app/365670/Blender/">Blender through Steam</a><br>
+          By default, this will install v4.4, which is not compatible with the SDK. Rollback to v4.0 by:
+      </li>
+          <ol>
+            <li>In your Steam Library, right click Blender</li>
+            <li>Click Properties</li>
+            <li>In the menu on the left, click Betas</li>
+            <li>In Beta Participation, open the dropdown and select "v4.0 - Stable"</li>
+          </ol>
       <li>Setup Proton for Blender</li>
             <ol>
                 <li>In your Steam Library, right click Blender</li>
@@ -52,6 +60,7 @@ title: HD2 Modding on Linux
                 <li>Click Force the use of a specific Steam Play compatibility tool</li>
                 <li>Select a Proton version (I use Proton 9.0-4 for no reason)</li>
             </ol>
+      <li>Open Blender through Steam and follow the HD2 Modding Guide</li>
     </ol>
   </body>
 </html>
