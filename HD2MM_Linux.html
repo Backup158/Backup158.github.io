@@ -15,6 +15,8 @@ title: HD2 Modding on Linux
     I'm assuming you have a cursory knowledge of filesystems and unzipping files. <br>
     These are not the only methods that work! There are a few ways to get this running, but these are the ways that worked for me.
     <h1><a href="https://www.nexusmods.com/helldivers2/mods/109">Helldivers 2 Mod Manager</a> - HD2MM - <a href="https://github.com/teutinsa/Helldivers2ModManager">(GitHub)</a></h1>
+    This is only relevant for v1.2.1.0! Version 2.0 of HD2MM and Arsenal v0.28 are planned to natively support Linux. There is also the <a href="https://github.com/v4n00/h2mm-cli">Helldivers 2 Linux CLI Modding Tool</a>.
+    <h2>Running HD2MM Through Proton</h2>
     <ol>
         <li>Download HD2MM and unzip it somewhere</li>
         <li>Open Steam and add HD2MM as a non-Steam game</li>
@@ -40,8 +42,10 @@ title: HD2 Modding on Linux
     However, Steam Deck players need another step. In this case, the game is installed in the `.local` folder, which HD2MM cannot access. A solution to this is to create a symlink pointing to your Steam library, and place it in an accessible folder. (Thanks to @DryRose in the Discord for sharing this).
     <br>
     From this point on, follow the regular guides on how to use HD2MM. <br>
+    <h2>Through Winetricks</h2>
+    <h2>Through Bottles</h2>
+    Idk but people say these work
     
-
     <h1><a href="https://github.com/Boxofbiscuits97/HD2SDK-CommunityEdition/releases/latest">HD2 Community SDK</a> for Blender</h1>
     When running Blender natively, trying to add the SDK will throw a <code>missing HDTool_Helper</code> error, regardless of version. <br>
     Also, I only set this up to repatch some abandoned mods. I never got it working, and I don't know if that's an issue with the SDK and Proton, or if it was just skill issue. <br>
