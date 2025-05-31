@@ -25,3 +25,14 @@ git filter-branch --env-filter '
 Then run `git push --force`
 
 For VS Code, run this in its terminal.
+
+Alt:
+```
+git filter-repo --commit-callback '
+    if commit.author_email == b"bad@email.com":
+        commit.author_email = b"good@email.com" 
+        commit.author_name = b"GoodName"
+        commit.committer_email = b"good@email.com" 
+        commit.committer_name = b"GoodName"
+' 
+```
