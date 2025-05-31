@@ -1,0 +1,37 @@
+---
+layout: default
+title: Darktide Creating a Weapon Customization Plugin
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="Adding attachments to Darktide using Extended Weapon Customization mod.">
+    <meta name="keywords" content="Darktide, 40k, Weapon Customization, Extended Weapon Customization, mods, modding">
+    <title>Darktide Creating a Weapon Customization Plugin</title>
+    <link rel="stylesheet" href="assets/css/EWC_Style.css">
+  </head>
+  <body>
+    <h1>Introduction</h1>
+    This is a walkthrough on how to make attachments for the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod for <i>Warhammer 40,000: Darktide</i>, which is the main point of creating a plugin. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods for Darktide. I'm assuming you will experiment by adding to the template plugin, so I won't cover the basics of creating Darktide mods here (see the <a href="https://dmf-docs.darkti.de/#/creating-mods?id=the-structure-of-a-mod">DMF docs on initializing mods)</a>. <br>
+    <h1>Requirements</h1>
+    <ol>
+      <li>Any text editor, preferably one with syntax highlighting. Notepad will work in a pinch, but programs such as Notepad++ or <a href="https://code.visualstudio.com/">Visual Studio Code</a> are much more powerful.</li>
+      <li>The <code>weapon_customization_plugin</code> template.<br>
+        This describes the core steps of how <i>everything</i> works. It goes over each step necessary for creating an attachment from scratch. The way <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/290">Syn's Edits</a> and my plugin (<a href="https://www.nexusmods.com/warhammer40kdarktide/mods/429">OwO</a>) have added parts is based on how Random Account did it in the <a href="www.nexusmods.com/warhammer40kdarktide/mods/276">MT Plugin</a>, which takes these steps and makes it easier to do en-masse. I'll cover the differences below.<br>
+        Grasmann also left a lot of notes in this plugin explaining what flags exist for making parts.<br>
+        To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> containing the template archive.</li>
+      <li>[Optional] Go to Mod Options --> Darktide Mod Framework --> Enable Developer Mode. This will let you reload mods (which will add your attachments) without having to close the game. By default, you reload mods using <code>Ctrl + Shift + R</code>.</li>
+      <li>[Optional] <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a>. This adds a menu that lets you move each attachment and see the changes live.<br>
+        Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord.<br>
+        I have a <a href="https://youtu.be/e4QcBg96gR8">quick demo video</a> for using it.</li>
+    </ol>
+    <h1 id="Basics">Going Through the Template</h1>
+    I'll briefly cover each part of this, but I won't discuss the comments. These explain each parameter for each step, and you can read those yourself. <br>
+    <h2 id="BasicsData">Technical Setup</h2>
+    The first line of the template is something every Darktide mod does. The first three sections, <b>Performance</b>, <b>Data</b>, and <b>Functions</b>, are just things you can copy and paste (when making your own plugin). You can skip to the next heading. <br>
+    For the nerds: <br>
+    <b>Performance</b> makes a local copy of global functions. This is supposed to have better performance, since accessing things from the global table involves table lookup. See <a href="https://stackoverflow.com/a/26155112">this StackOverflow discussion</a> for elaboration. I have not verified this myself, but Gras has said similar things in the Discord. <br>
+    <b>Data</b> is making shorthand for where game data is located, so you can save some typing. For example, the actual location of the model for the Shredder Autopistol iron sights is <code>"content/items/weapons/player/ranged/sights/autogun_pistol_sight_01"</code>. Instead of typing out that mess at the start every time, it gets stored into <code>_item_ranged</code>. The <code>..</code> means string concatenation, which means "connect these two strings to make one string." <br>
+    <b>Functions</b> 
+  </body>
+</html>
