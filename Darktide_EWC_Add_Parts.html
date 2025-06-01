@@ -17,7 +17,7 @@ title: Darktide Creating a Weapon Customization Plugin
     <ol>
       <li>Any text editor, preferably one with syntax highlighting. Notepad will work in a pinch, but programs such as Notepad++ or <a href="https://code.visualstudio.com/">Visual Studio Code</a> are much more powerful.</li>
       <li>The <code>weapon_customization_plugin</code> template.<br>
-        This describes the core steps of how <i>everything</i> works. It goes over each step necessary for creating an attachment from scratch. The way <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/290">Syn's Edits</a> and my plugin (<a href="https://www.nexusmods.com/warhammer40kdarktide/mods/429">OwO</a>) have added parts is based on how Random Account did it in the <a href="www.nexusmods.com/warhammer40kdarktide/mods/276">MT Plugin</a>, which takes these steps and makes it easier to do en-masse. I'll cover the differences below.<br>
+        This describes the core steps of how <i>everything</i> works. It goes over each step necessary for creating an attachment from scratch. The way <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/290">Syn's Edits</a> and my plugin (<a href="https://www.nexusmods.com/warhammer40kdarktide/mods/429">OwO</a>) have added parts is based on how Random Account did it in the <a href="www.nexusmods.com/warhammer40kdarktide/mods/276">MT Plugin</a>, which takes these steps and makes it easier to do en-masse. I'll cover the differences further below.<br>
         Grasmann also left a lot of notes in this plugin explaining what flags exist for making parts.<br>
         To get it, join the <a href="https://discord.gg/rKYWtaDx4D">Darktide Modders Discord</a>, go to the <code>#weapon-customization-mod</code> channel, and scroll way back to the <a href = "https://discord.com/channels/1048312349867646996/1168063453416669284/1170507811713728643">pinned message</a> containing the template archive.</li>
       <li>[Optional] Go to Mod Options --> Darktide Mod Framework --> Enable Developer Mode. This will let you reload mods (which will add your attachments) without having to close the game. By default, you reload mods using <code>Ctrl + Shift + R</code>.</li>
@@ -28,10 +28,37 @@ title: Darktide Creating a Weapon Customization Plugin
     <h1 id="Basics">Going Through the Template</h1>
     I'll briefly cover each part of this, but I won't discuss the comments. These explain each parameter for each step, and you can read those yourself. <br>
     <h2 id="BasicsData">Technical Setup</h2>
-    The first line of the template is something every Darktide mod does. The first three sections, <b>Performance</b>, <b>Data</b>, and <b>Functions</b>, are just things you can copy and paste (when making your own plugin). You can skip to the next heading. <br>
+    The first line of the template is something every Darktide mod does. The first three sections, <b>Performance</b>, <b>Data</b>, and <b>Functions</b>, are just things you can copy and paste (when making your own plugin). You can skip <a href="BasicsInject">ahead</a>.<br>
     For the nerds: <br>
     <b>Performance</b> makes a local copy of global functions. This is supposed to have better performance, since accessing things from the global table involves table lookup. See <a href="https://stackoverflow.com/a/26155112">this StackOverflow discussion</a> for elaboration. I have not verified this myself, but Gras has said similar things in the Discord. <br>
     <b>Data</b> is making shorthand for where game data is located, so you can save some typing. For example, the actual location of the model for the Shredder Autopistol iron sights is <code>"content/items/weapons/player/ranged/sights/autogun_pistol_sight_01"</code>. Instead of typing out that mess at the start every time, it gets stored into <code>_item_ranged</code>. The <code>..</code> means string concatenation, which means "connect these two strings to make one string." <br>
-    <b>Functions</b> 
+    <b>Functions</b> defines a prepend function so you can insert things into existing tables. Prepending means you have a list, for example, and you put a new thing into the list at the start. Since it only applies to one fix at a time, the index `i` is always 1. Too lazy to find the real reason for prepending vs appending, so I just go with it.
+    <h2 id="BasicsPreInject">More Technical Setup</h2>
+    Before I get into it, there's also this part around the actual injections: <br>
+    <code>
+        function mod.on_all_mods_loaded()
+            local wc = get_mod("weapon_customization")
+            if wc then
+                ...
+            end
+        end
+    </code>
+    <br>
+    This is just background stuff to make sure our code runs properly. The function on the outside means "run this one startup, once all mods have loaded." Then, it checks to make sure EWC is installed. If it is, your code will execute. Otherwise, nothing will happen. I personally do not use this exact structure, but I'll go with for the sake of this guide.
+    <h2 id="BasicsInject">Injection</h2>
+    Now for the actual process that injects parts.
+    <h2 id="BasicsInject1">ID Assignment</h2>
+    <code>
+      table.insert(
+        wc.attachment.autogun_p1_m1.sight,
+        {id = "autogun_pistol_sight_01", name = "Autopistol Sight"}
+      )
+    </code>
+    This section injects the ID <code>autogun_pistol_sight_01</code> into the table <code>wc.attachment.autogun_p1_m1.sight</code>. <br>
+    &emsp; <code>wc.attachment.</code> means this is an attachments table from the original EWC mod <br>
+    &emsp; <code>autogun_p1_m1.</code> means it's the attachments for all of the autoguns (Infantry, Braced, and Vigilant). Autoguns are a special case because all 3 are in the same name. Normally, the number in <code>p1</code> would change corresponding to the Pattern. For example, Lasguns are split across p1 (Infantry), p2 (Helbore), and p3 (Recon). <code>m1</code> means Mark, but it includes all of them with just m1.<br>
+    &emsp; <code>sights</code> is the name of the slot these attachments are associated with. These names will be very similar to the name that shows up in the Customization menus. <br>
+     
+    
   </body>
 </html>
