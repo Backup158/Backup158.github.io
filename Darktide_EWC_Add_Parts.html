@@ -74,6 +74,8 @@ title: Darktide Creating a Weapon Customization Plugin
     </code>
     <i>Note: I changed some of the spacing because the original annoys me. The functionally is still the same.</i> <br>
     The main takeaway here is <code>autogun_pistol_sight_01 = { model = _item_ranged.."/sights/autogun_pistol_sight_01" ... }</code>. That first part, as you might recognize, is the ID given above. Then, the model is the "address" (I don't know exactly what to call this) of where Darktide keeps the physical model. In this case, it's the model for the Shredder Autopistol iron sights. To use parts from player weapons, they'll all start with <code>_item_ranged</code> or <code>_item_melee</code>. For other things, it takes more work that I can't explain very well. <br>
-    As far as I know, there's not really an easy way to match the model and address. What I do is scroll through the Customization menu until I find an attachment from EWC that looks like the part I want. I take note of the name (with "Rename Attachments" disabled in the EWC Mod Options), then try and find it in the EWC files. 
+    As far as I know, there's not really an easy way to match the model and address. What I do is scroll through the Customization menu until I find an attachment from EWC that looks like the part I want. I take note of the name (with "Rename Attachments" disabled in the EWC Mod Options), then try and find it in the EWC files. I go over search methods in my <a href="/Darktide_EWC_Edits.html#FindingAttachmentIDs">EWC custom edits guide</a>. Following that method, you'll find the ID assignment. Scroll a bit further down, and you'll find the model assignment.
+    <h2 id="BasicsInject3">Fixes</h2>
+    
   </body>
 </html>
