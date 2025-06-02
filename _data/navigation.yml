@@ -20,6 +20,9 @@ toc:
       - page: Darktide Weapon Customization Edits
         url: /Darktide_EWC_Edits.html
         description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod
+      - page: Darktide Creating a Weapon Customization Plugin
+        url: /Darktide_EWC_Add_Parts.html
+        description: Basics of making a plugin for the Darktide Extended Weapon Customization mod
       - page: Nexus Mods Features
         url: /NexusModsTricks.html
         description: Showcasing some (surprisely little known) features on Nexus Mods
