@@ -41,14 +41,16 @@ title: Darktide Creating a Weapon Customization Plugin
 
     <h2 id="BasicsPreInject">More Technical Setup</h2>
     Before I get into it, there's also this part around the actual injections: <br>
-    <code class="codeBlock">
-        function mod.on_all_mods_loaded()
-            local wc = get_mod("weapon_customization")
-            if wc then
-                ...
-            end
-        end
-    </code>
+    <div class="codeBlock">
+      <code>
+          function mod.on_all_mods_loaded()
+              local wc = get_mod("weapon_customization")
+              if wc then
+                  ...
+              end
+          end
+      </code>
+    </div>
     <br>
     This is just background stuff to make sure our code runs properly. The function on the outside means "run this one startup, once all mods have loaded." Then, it checks to make sure EWC is installed. If it is, your code will execute. Otherwise, nothing will happen. I personally do not use this exact structure, but I'll go with for the sake of this guide.
     <h2 id="BasicsInject">Injection</h2>
