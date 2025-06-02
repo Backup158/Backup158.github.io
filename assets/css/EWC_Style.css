@@ -28,7 +28,11 @@ body h1, h2, h3 {
 /* Code blocks preserving white space */
 .codeBlock {
     background: #2b2b2b;
-    white-space: pre;
+    white-space: pre-line;
+    padding: 2px;
+    margin: 4px;
+    width: 70%;
+    margin-left: 4%;
 }
 
 /* Adding a border */
