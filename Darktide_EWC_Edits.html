@@ -27,9 +27,10 @@ title: Darktide Weapon Customization Edits
     <h1 id="Example">Walkthrough</h1>
     Here's a specific example. I equipped this combination of parts on a Force Greatsword, and there's a big gap at the bottom.<br>
     <img src="assets/images/SwordGap1.png" alt="FGS gap 1" class="smol"><br>
-    This does not spark joy! To fix it, I need to change the position values for the pommel. While I'm at it, I might as well move the hilt down a bit.<br>
+    This does not spark joy! To fix it, I need to change the position values for the pommel. While I'm at it, I might as well move the hilt down a bit, since I think it'll look better.<br>
     <h2 id="InjectingFixes">Injecting Fixes</h2>
-    After fixes get injected, the mod searches for the first one that matches (from top down). The base mod and plugins will have their own fixes injected, but these are typically written for broad, generic cases. You could create your own fixes, and there's two options for where to keep them:
+    After fixes get injected, the mod searches for the first one that matches the dependencies. First, they are ordered by mod; it goes by load order for the plugins, then the base mod's fixes. Within each mod, the fixes are ordered from top to bottom. <br>
+    The base mod and plugins inject their own fixes, but these are typically written for broad, generic cases. This may lead to oddities with specific combinations, as you have just seen. You could create your own fixes, and there's two options for where to keep them:
     <ol class="ewc">
       <li>Directly in one of the plugins</li>
       <li>In your own fixes-only plugin</li>
@@ -44,8 +45,8 @@ title: Darktide Weapon Customization Edits
       <img src="assets/images/StripPlugin3.png" alt="strip plugin"> <br>
       Feel free to change the name, but keep in mind that you'll need to rename the folders, the .mod and .lua files, and any mentions of the name within those files.<br>
       <br>
-      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code formatting).<br>
-      I put this file below the main plugin but above the other plugins. It needs to be below the main plugin so that can create its anchor tables (which you're injecting into) first.<br>
+      Add this to your load order and launch the game to make sure it still works. If you get something like a "69 func: nil" error, you deleted too much and have a syntax error (messed up code formatting, such as a missing a comma).<br>
+      I put this file below the main plugin but above the other plugins, so my fixes have priority over the plugins' fixes. It needs to be below the main plugin so that can create its anchor tables (which you're injecting into) first.<br>
       <br>
       You don't have to go this far, but here's is my ultra stripped version with some personal edits.<br>
       <button type="button" class="collapsible">Personal Edits</button>
