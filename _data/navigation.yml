@@ -17,6 +17,9 @@ toc:
       - page: HD2 Modding on Linux
         url: /HD2MM_Linux.html
         description: Running Helldivers 2 Modding Tools on Linux
+      - page: Darktide Resources
+        url: DarktideResources.md
+        description: Collection of various resources on the Internet, usually related to modding
       - page: Darktide Weapon Customization Edits
         url: /Darktide_EWC_Edits.html
         description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod
