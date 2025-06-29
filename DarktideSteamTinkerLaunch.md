@@ -27,3 +27,5 @@ Darktide is not, but there is a [community plugin](https://www.nexusmods.com/war
 5) Close STL if you haven't
 6) Rerun your game and click the MO2 button again
 7) You should be able to set up an instance for your game as usual
+
+now for me i couldn't download any mods through the mod manager button so then i decided to kill myself
