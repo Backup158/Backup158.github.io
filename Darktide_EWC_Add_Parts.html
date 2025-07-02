@@ -12,7 +12,7 @@ title: Darktide Creating a Weapon Customization Plugin
   </head>
   <body>
     <h1>Introduction</h1>
-    This is a walkthrough on how to make attachments for the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod for <i>Warhammer 40,000: Darktide</i>, which is the main point of creating a plugin. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods for Darktide. I'm assuming you will experiment by adding to the template plugin, so I won't cover the basics of creating Darktide mods here (see the <a href="https://dmf-docs.darkti.de/#/creating-mods?id=the-structure-of-a-mod">DMF docs on initializing mods)</a>. <br>
+    This is a walkthrough on how to make attachments for the <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/277">Extended Weapon Customization</a> (EWC) mod for <i>Warhammer 40,000: Darktide</i>, which is the main point of creating a plugin. I'm assuming you have a cursory knowledge of filesystems and are comfortable with installing mods for Darktide. I'm assuming you will experiment by adding to the template plugin, so I won't cover the basics of creating Darktide mods here (see the <a href="https://dmf-docs.darkti.de/#/creating-mods?id=the-structure-of-a-mod">DMF docs on initializing mods)</a>. I've tried to include some explanation for general programming terminology, but if I missed anything you should look it up elsewhere. <br>
 
     <h1>Requirements</h1>
     <ol>
@@ -24,14 +24,15 @@ title: Darktide Creating a Weapon Customization Plugin
       <li>[Optional] Go to Mod Options --> Darktide Mod Framework --> Enable Developer Mode. This will let you reload mods (which will add your attachments) without having to close the game. By default, you reload mods using <code>Ctrl + Shift + R</code>.</li>
       <li>[Optional] <a href="https://www.nexusmods.com/warhammer40kdarktide/mods/312">Modding Tools utility</a>. This adds a menu that lets you move each attachment and see the changes live.<br>
         Note that the Nexus version has a bug that will make you crash when you reload mods, which is fixed in the versions uploaded to the <a href="https://discord.com/channels/1048312349867646996/1252949356823314444">Modding Tools thread</a> in the Darktide Modders Discord.<br>
-        I have a <a href="https://youtu.be/e4QcBg96gR8">quick demo video</a> for using it.</li>
+        I have a <a href="https://youtu.be/e4QcBg96gR8">quick demo video</a> for using it in this context.</li>
     </ol>
 
     <h1 id="Basics">Going Through the Template</h1>
     I'll briefly cover each part of this, but I won't discuss the comments. These explain each parameter for each step, and you can read those yourself. <br>
 
     <h2 id="BasicsData">Technical Setup</h2>
-    The first line of the template is something every Darktide mod does. The first three sections, <b>Performance</b>, <b>Data</b>, and <b>Functions</b>, are just things you can copy and paste (when making your own plugin). You can skip <a href="BasicsInject">ahead</a>.<br>
+    The first line of the template is something every Darktide mod does, getting a reference for itself so it can use features from Darktide Mod Framework. <br>
+    The first three sections, <b>Performance</b>, <b>Data</b>, and <b>Functions</b>, are just things you can copy and paste (when making your own plugin). You can skip <a href="BasicsInject">ahead</a>.<br>
     <button type="button" class="collapsible">For the nerds: </button>
     <divPlugin class="content">
       <b>Performance</b> makes a local copy of global functions. This is supposed to have better performance, since accessing things from the global table involves table lookup. See <a href="https://stackoverflow.com/a/26155112">this StackOverflow discussion</a> for elaboration. I have not verified this myself, but Gras has said similar things in the Discord. Upd: This is confirmed by a Lua optimization guide, created and presented by Fatshark at a game dev conference (I forgot which): [Fatshark Lua Optimization Guide](https://dmf-docs.darkti.de/#/Fatshark-%E2%80%90-Lua-Optimizing-Guide?id=use-a-local-to-avoid-repeated-globaltable-lookups) <br>
@@ -122,6 +123,6 @@ title: Darktide Creating a Weapon Customization Plugin
         "autogun_pistol_sight_01"
       )
     </pre>
-    This injects your attachment by its ID into the slot's table. 
+    This injects your attachment by its ID into the slot's table. In general, I'm not sure how necessary this is, but I do know it's required for having functional scopes with lenses.
   </body>
 </html>
