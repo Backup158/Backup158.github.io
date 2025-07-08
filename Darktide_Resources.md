@@ -101,6 +101,8 @@ Decompiles the lua bytecode into readable lua code.  \
 Thanks to Aussiemoon.  \
 There is a [precompiled version](https://github.com/igromanru/luajit-decompiler-v2/releases/latest) for your convenience, thanks to igromanru
 
+For these two, the commands are written in the readmes, but I'll just throw it in [my own page](Darktide_Decompiling) because I'm special hehe
+
 \>\> [dtmt](https://git.sclu1034.dev/bitsquid_dt/dtmt)
 
 Honestly idk how this works because I'm stupid, but I think it's supposed to combine the previous two into one step  \
