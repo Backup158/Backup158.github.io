@@ -45,6 +45,7 @@ The Darktide community hosts a copy of these in a [GitHub repository, maintained
     - GitHub doesn't let you upload more than 100 files at once, so uploading it through local git tools is much easier
     - Where you download it to doesn't really matter
 3. Replace the contents of your fork (besides the README) with the contents of the `output` folder
+    - **Make sure you used the `-m` flag when you ran the decompiler!** Otherwise there will be unecessary differences and you'll have to redo the PR
     - Delete all, then add all
     - This way you catch if something was deleted
 4. Upload it with git 
