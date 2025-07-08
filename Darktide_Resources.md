@@ -57,7 +57,7 @@ Some of these are actual mods, while some of these are just proofs of concept. T
 
 ## Mission ID Checkers
 
-For use with [Many More Try](https://www.nexusmods.com/warhammer40kdarktide/mods/175)
+For use with [Many More Try](https://www.nexusmods.com/warhammer40kdarktide/mods/175). Basically having a private solo lobby by joining a mission that expired from the board, which still gives you rewards.
 
 \>\> [DTFilter](https://maelstroom.net/)
 
