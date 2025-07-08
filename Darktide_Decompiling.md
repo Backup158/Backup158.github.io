@@ -27,9 +27,10 @@ Because of my current setup, these instructions will be written from a Windows p
 4. Run limn on your Darktide game folder, through the command prompt
     - From the game bundles, extract the bytecode
     - This will dump the bytecode into the `out` folder
-    - ex: `limn -i "C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 Darktide\bundle" lua -m`
+    - ex: `limn -i "C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 Darktide\bundle" lua`
         - `lua` means extract only lua files (the code); to include textures and the rest, use `*` instead
         - That's the default path for Steam; your file path may differ
+        - If you own Darktide on Steam, you can just run `limn lua` and let it automatically find your game for you
 5. Run luajit-decompiler on the `out` folder
     - This dumps the lua code into the `output` folder
     - ex: `luajit-decompiler-v2.exe out -m`
