@@ -18,8 +18,8 @@ toc:
         url: /HD2MM_Linux.html
         description: Running Helldivers 2 Modding Tools on Linux
       - page: Darktide Resources
-        url: DarktideResources.md
-        description: Collection of various resources on the Internet, usually related to modding
+        url: Darktide_Resources.md
+        description: Collection of various resources on the Internet for Warhammer 40,000 Darktide, usually related to modding, but I just threw whatever
       - page: Darktide Weapon Customization Edits
         url: /Darktide_EWC_Edits.html
         description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod
