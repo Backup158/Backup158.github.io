@@ -36,3 +36,21 @@ Because of my current setup, these instructions will be written from a Windows p
         - This is assuming you put the `.exe` files in the same folder, as written in step 1
         - `-m` means minimize changes, so it adds trailing commas and stuff (this doesn't really matter for us but it's how it's done in Aussiemoon's repository to share with us)
 6. You're done! Read the output with your method of choice
+
+# Uploading These Files
+The Darktide community hosts a copy of these in a [GitHub repository, maintained by Aussiemoon](https://github.com/Aussiemon/Darktide-Source-Code). If you decompiled the code before Aussiemoon caught up to the latest patch, you can make a pull request (PR), if you have a GitHub account.
+
+1. Fork the repository
+2. Clone your fork locally
+    - GitHub doesn't let you upload more than 100 files at once, so uploading it through local git tools is much easier
+    - Where you download it to doesn't really matter
+3. Replace the contents of your fork (besides the README) with the contents of the `output` folder
+    - Delete all, then add all
+    - This way you catch if something was deleted
+4. Upload it with git 
+    - I used the VS Code Extension
+    - Whatever it is, you'll be able to upload them all at once
+5. Make a PR
+    1. Compare across forks
+    2. Select the main branch of your fork
+    3. Fill out and submit the PR
