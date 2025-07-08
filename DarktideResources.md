@@ -46,12 +46,13 @@
 > In the Psykhanium or SoloPlay maps, lets you equip weapons and tune their stats/perks/blessings  \
 Updated by Az, forked from Fracticality (left in the Darktide Modders Discord)
 
-[A bunch of random small things in the #creation-showcase channel in the Darktide Modders Discord](https://discord.com/channels/1048312349867646996/1048318548180738118)
-
+A bunch of random small things in the [#creation-showcase channel](https://discord.com/channels/1048312349867646996/1048318548180738118) in the Darktide Modders Discord
 > Some of these are actual mods, while some of these are just proofs of concept. Too many to comprehensively find, but a few to note
 > - Various Audio plugin mods by Dattebayo
 > - Enemy spawn replacer by Wobin (does not always work in solo play?)
 > - [Don't Start Empty Games](https://discord.com/channels/1048312349867646996/1073779856338329780) by raindish. Leave if a lobby is about to start and you're the only one in the lobby
+> - [(NOT WORKING) FriendZone](https://github.com/LeicaSimile/friend_zone/blob/main/scripts/mods/friend_zone/core/zone_manager.lua) by ashe. Idea was to put circles showing the range of auras, smokes, etc
+> - [CharacterGrid](https://discord.com/channels/1048312349867646996/1079236027690012773/1383903098329763851) by defallt. Puts character select into a grid for less scrolling. [Updated version on 2025-06-26](https://discord.com/channels/1048312349867646996/1079236027690012773/1387946912413651068) by xsSplater
 
 ## Mission ID Checkers
 
