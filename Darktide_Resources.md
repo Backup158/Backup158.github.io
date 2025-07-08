@@ -22,7 +22,11 @@ Calculates weapon breakpoints (hits to kill) for enemy types. Unsure if this is 
 # Modding
 \>\> [NexusMods](https://www.nexusmods.com/games/warhammer40kdarktide)
 
-Where most mods are hosted
+Where most mods are hosted. Requires an account (free) for downloads.
+
+\>\> [dtkit-patch](https://github.com/manshanko/dtkit-patch)
+
+The original source for the script that patches Darktide to be able to load mods. This includes a precompiled binary for Linux, too.
 
 \>\> [Darktide Modders Discord](https://discord.gg/rKYWtaDx4D)
 
