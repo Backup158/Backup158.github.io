@@ -1,7 +1,9 @@
 # Decompiling the Darktide Source Code
 Thanks to smart people, we have the tools to decompile the source code for Warhammer 40,000: Darktide into readable Lua code.
 
-Because of my current setup, these instructions will be written from a Windows perspective.
+These tools come with instructions, but lazy people (people) get annoyed at having to read two documents (oh the horror), so I just collated them into this page for convenience. Consequently, I don't cover every single option because that's more reading.
+
+Because of my current setup, these instructions will be written from a Windows perspective. I'm assuming you are familiar with moving folders and files around, but I'll treat you like an idiot because that's how I like to be treated (wait what who said that).
 
 # Requirements
 - Darktide installed on your computer
@@ -20,8 +22,9 @@ Because of my current setup, these instructions will be written from a Windows p
      |---> luajit-decompiler-v2.pdb
     ```
     - I had limn in its own folder because I'm lazy
-2. Open the command prompt (`cmd.exe`)
+2. Open the command prompt (`cmd.exe`) or PowerShell
 3. (Optional) In the command prompt, move to the Decompiling Folder
+    - Otherwise, you'll have to include the full path before running each exe
     - ex: `cd "C:\Users\HadronGooner\Documents\Decompiling Folder"`
     - Replace the path with wherever you put extracted it
 4. Run limn on your Darktide game folder, through the command prompt
