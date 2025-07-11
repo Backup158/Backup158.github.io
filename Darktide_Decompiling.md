@@ -8,7 +8,7 @@ Because of my current setup, these instructions will be written from a Windows p
 # Requirements
 - Darktide installed on your computer
 - [limn](https://github.com/manshanko/limn) bundle extractor
-- [luajit decompiler](https://github.com/Aussiemon/luajit-decompiler-v2), though I recommend downloading the [precompiled version](https://github.com/igromanru/luajit-decompiler-v2/releases/latest)
+- [luajit decompiler](https://github.com/Aussiemon/luajit-decompiler-v2), though I recommend downloading the [precompiled older version](https://github.com/igromanru/luajit-decompiler-v2/releases/latest) if you just want it for yourself
 
 # Instructions
 1. Extract limn and the decompiler to a folder, which I'll call "Decompiling Folder" from now on
@@ -49,7 +49,9 @@ The Darktide community hosts a copy of these in a [GitHub repository, maintained
     - GitHub doesn't let you upload more than 100 files at once, so uploading it through local git tools is much easier
     - Where you download it to doesn't really matter
 3. Replace the contents of your fork (besides the README) with the contents of the `output` folder
-    - **Make sure you used the `-m` flag when you ran the decompiler!** Otherwise there will be unecessary differences and you'll have to redo the PR
+    - **Make sure you used the `-m` flag when you ran the decompiler!** 
+    - **Make sure you're using the latest decompiler version!**
+    - Otherwise there will be unecessary differences and you'll have to redo the PR
     - Delete all, then add all
     - This way you catch if something was deleted
 4. Upload it with git 
