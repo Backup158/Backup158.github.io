@@ -12,20 +12,28 @@ toc:
       - page: GitHub Pages
         url: /PagesDocumentation.html
         description: Some documentation for working with GitHub Pages
-  - title: Modding
+  - title: Warhammer 40,000 - Darktide
+    subfolderitems:
+      - page: Darktide Resources
+        url: Darktide_Resources.md
+        description: Collection of various resources on the Internet for Warhammer 40,000 Darktide, usually related to modding, but I just threw whatever
+      - page: Making Weapon Customization Edits
+        url: /Darktide_EWC_Edits.html
+        description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod
+      - page: Creating a Weapon Customization Plugin
+        url: /Darktide_EWC_Add_Parts.html
+        description: Basics of making a plugin for the Darktide Extended Weapon Customization mod
+      - page: Source Code Decompiling
+        url: /Darktide_Decompiling.md
+        description: Instructions for running tools to decompile the Darktide Source code
+      - page: Mod Creation Example Walkthrough
+        url: /Darktide_Mod_Creation_Example
+        description: Going through how I created a mod as an example
+  - title: Other Modding
     subfolderitems:
       - page: HD2 Modding on Linux
         url: /HD2MM_Linux.html
         description: Running Helldivers 2 Modding Tools on Linux
-      - page: Darktide Resources
-        url: Darktide_Resources.md
-        description: Collection of various resources on the Internet for Warhammer 40,000 Darktide, usually related to modding, but I just threw whatever
-      - page: Darktide Weapon Customization Edits
-        url: /Darktide_EWC_Edits.html
-        description: Making adjustments to attachments for the Darktide Extended Weapon Customization mod
-      - page: Darktide Creating a Weapon Customization Plugin
-        url: /Darktide_EWC_Add_Parts.html
-        description: Basics of making a plugin for the Darktide Extended Weapon Customization mod
       - page: Nexus Mods Features
         url: /NexusModsTricks.html
         description: Showcasing some (surprisely little known) features on Nexus Mods
