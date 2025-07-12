@@ -27,8 +27,11 @@ toc:
         url: /Darktide_Decompiling.md
         description: Instructions for running tools to decompile the Darktide Source code
       - page: Mod Creation Example Walkthrough
-        url: /Darktide_Mod_Creation_Example
-        description: Going through how I created a mod as an example
+        url: /Darktide_Mod_Creation_Example.md
+        description: Going through how I created a Darktide mod
+      - page: Mod Manager Comparison
+        url: /Darktide_Mod_Managers.md
+        description: My thoughts on the mod managers available for Darktide
   - title: Other Modding
     subfolderitems:
       - page: HD2 Modding on Linux
