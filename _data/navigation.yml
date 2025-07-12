@@ -15,7 +15,7 @@ toc:
   - title: Warhammer 40,000 - Darktide
     subfolderitems:
       - page: Darktide Resources
-        url: Darktide_Resources.md
+        url: Darktide_Resources.html
         description: Collection of various resources on the Internet for Warhammer 40,000 Darktide, usually related to modding, but I just threw whatever
       - page: Making Weapon Customization Edits
         url: /Darktide_EWC_Edits.html
@@ -24,13 +24,13 @@ toc:
         url: /Darktide_EWC_Add_Parts.html
         description: Basics of making a plugin for the Darktide Extended Weapon Customization mod
       - page: Source Code Decompiling
-        url: /Darktide_Decompiling.md
+        url: /Darktide_Decompiling.html
         description: Instructions for running tools to decompile the Darktide Source code
       - page: Mod Creation Example Walkthrough
-        url: /Darktide_Mod_Creation_Example.md
+        url: /Darktide_Mod_Creation_Example.html
         description: Going through how I created a Darktide mod
       - page: Mod Manager Comparison
-        url: /Darktide_Mod_Managers.md
+        url: /Darktide_Mod_Managers.html
         description: My thoughts on the mod managers available for Darktide
   - title: Other Modding
     subfolderitems:
