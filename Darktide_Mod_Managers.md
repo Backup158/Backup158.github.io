@@ -1,6 +1,6 @@
 Here's a collection of my thoughts comparing various mod management methods for *Warhammer 40,000: Darktide*.
 
-While I haven't used them all extensively, I know bit about each of them.
+While I haven't used them all extensively, I know bit about each of them and figured I'd put all my thoughts in one place to come back to later.
 
 # Manual Installation
 Ole reliable. Works in all cases. The "worst" (most tedious) option, but you can rest assured that if something screwed up, it was most likely *your* fault! Ok maybe that's not actually a good thing.
@@ -26,9 +26,31 @@ As long as it works, it's a more advanced version of AML for manual modding. The
 # Mod Organizer 2
 Mod Organizer 2 can be downloaded from [Nexus](https://www.nexusmods.com/skyrimspecialedition/mods/6194) or [GitHub](https://github.com/ModOrganizer2/modorganizer/releases/latest). While Darktide isn't officially supported by MO2, there is a [community plugin](https://www.nexusmods.com/warhammer40kdarktide/mods/492) by Nyvrak and Merioni. 
 
-https://github.com/Backup158/Darktide-Mod-Edits/tree/main/MO2%20Mods%20Folder
+Since this was designed for Bethesda games specifically, there's not much of a major difference from Vortex in the context of Darktide. 
+
+The main benefits are the load order/separator system, running the mod patcher automatically after game updates, and mixing MO2 mods with unmanaged mods.  \
+The load order is the left panel, and you can drag mods around. You can also create separators to segment your load order, which then lets you send new mods directly to the a separator without having to note the exact load order number to put it at. Personally, I find this simpler and more intuitive than making a list of load before/after rules (but remember you can use AML with this, if you prefer).  \
+The way the virtual file system (VFS) works, it seems like I can edit mods and see the effects after reloading midgame without needing to redeploy mods. I don't fully understand how the VFS works so don't have a solid understanding why this works, but it's what I've experienced.
+
+The downside is that you need to run Darktide through MO2 every time. You can set up a shortcut for this but I haven't done that because I'm lazy. I've also built up that habit from years of Skyrim/Fallout modding so it's not a big deal to me personally.
 
 # Vortex
-https://www.nexusmods.com/site/mods/684
+[Nexus Link](https://www.nexusmods.com/site/mods/684)
 
 I actually don't have much experience with Vortex for Darktide.
+
+The main benefit is being able to use collections. It also comes with the other standard mod manager things
+
+---
+
+| Method            | Checks Nexus for mod updates | Can use Nexus Collections | Can have Automatic Sorting | Can easily edit mods midgame | Can easily have multiple versions of the same mod to switch between | Can separate have seperate copies of files to selectively overwrite | Will continue to function if the original developer dies | 
+|-------------------|------------------------------|---|---|---|---|---|---|
+| Vortex            | +                            |   |   |   |   |   |   |
+| Mod Organizer 2   |  +                           |   |   |   |   |   |   |
+| Servo-Modquisitor |  0                           |   |   |   |   |   |   |
+| Manual            |  0                           |   |   |   |   |   |   |
+
+---
+
+# My Workflow/Needs
+
