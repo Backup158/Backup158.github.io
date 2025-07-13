@@ -19,9 +19,15 @@ Manual installation without most of the tedium of adding things to the load orde
 
 Used with manual installation.
 
-Like AML, but it's a the product of a hand-crafted list. The order is based off what the mod authors wrote in the descriptions, as read by a human. It also checks for obsolete mods (typically ones that have been integrated into the game or got renamed in later versions), and this list is also maintained by a human.
+Like AML, but it's a the product of a hand-crafted list. The order is based off what the mod authors wrote in the descriptions, as read by a human. The benefits over an automated system are:
+- It can check for obsolete mods
+    - Integrated into the game
+    - Old versions have a different name
+- Handling strange edge cases, such as noting that while Scoreboard officially requires Animation Events, it functions 99% fine without it.
 
-As long as it works, it's a more advanced version of AML for manual modding. The main downside is that it relies on the developer to continue updating it. Currently, this effectively isn't a downside, since xsSplater is and has been active for a long time. However, if he has issues due to unforseen events in the future, it may be complicated to maintain this.
+You run this script every time you add/remove a mod. You can then do whatever you want with the load order afterwards.
+
+As long as it's updated, it's a more advanced version of AML for manual modding. The main downside is that its single point of failure is relying on one developer to continue updating it. Currently, this effectively isn't a downside, since xsSplater is and has been active for a long time. However, if he has issues due to unforseen events in the future, it may be complicated to maintain this.
 
 # Mod Organizer 2
 Mod Organizer 2 can be downloaded from [Nexus](https://www.nexusmods.com/skyrimspecialedition/mods/6194) or [GitHub](https://github.com/ModOrganizer2/modorganizer/releases/latest). While Darktide isn't officially supported by MO2, there is a [community plugin](https://www.nexusmods.com/warhammer40kdarktide/mods/492) by Nyvrak and Merioni. 
@@ -37,9 +43,12 @@ The downside is that you need to run Darktide through MO2 every time. You can se
 # Vortex
 [Nexus Link](https://www.nexusmods.com/site/mods/684)
 
-I actually don't have much experience with Vortex for Darktide.
+> [!CAUTION]
+> I actually don't have much experience with Vortex for Darktide. This may not be accurate to the current version because I am not setting up yet another mod manager.
 
-The main benefit is being able to use collections. It also comes with the other standard mod manager things
+The main benefit is being able to use collections. It also comes with the other standard mod manager things.
+
+Downside is that you need to set load before/after rules or use the oddly laggy load order tab (if you don't go AML). Also need to purge/redeploy on new mod installation.
 
 ---
 # Benefits Comparison Table
