@@ -135,13 +135,25 @@ title: Darktide Creating a Weapon Customization Plugin
     <br>
     First, it checks if this weapon has customizations available. If so, it searches to see if this weapon family has fixes available. Then, it checks <i>every</i> attachment slot to list out <b>all of this weapon's currently equipped attachments</b>. Once it has this list, it goes through some quick checks to see if dependencies need to be checked at all.<br>
     <br>
-    EWC uses the native function <code>table.contains</code> to see if the dependencies contain at least one of the equipped attachments. It'll go through <i>every dependency check</i> in the fixes table for this weapon family. Since this is a comprehensive search, that means that every fix you add affects performance (very minorly) for all the weapons in the family, not just the ones with your parts equipped.<br>
+    EWC uses the native function <code>table.contains</code> to see if the dependencies contain at least one of the equipped attachments. It'll go through (in the worst case) <i>every dependency check</i> in the fixes table for this weapon family. Since this is a comprehensive search (because it can't know if a fix is uncessary without checking it), that means that every fix you add affects performance (very minorly) for all the weapons in the family, not just the ones with your parts equipped.
+    <h2 id="FixesCalculationsBigO">Calculating the Worst-Case Scenario</h2>
     The key here is that we can calculate the worst-case total amount of checks made, checking every single dependency.<br>
-    We have every slot checked for each dependencies, so we can call it <code>(number_of_slots * possible_dependencies) = total checks done</code><br>
+    We have every slot checked for each dependencies, so we can call it <code>(number_of_slots * possible_dependencies) = total_checks_done</code><br>
     If you add another slot, that gives <code>(number_of_slots + 1) * possible_dependencies = (number_of_slots * possible_dependencies) + possible_dependencies</code> <br>
     If you add another dependency check, that gives <code>number_of_slots * (possible_dependencies + 1) = (number_of_slots * possible_dependencies) + number_of_slots</code> <br>
-    Ok, so what does this mean? It means that when you add a slot, it increases the total checks done by the amount of dependencies. Since dependencies will always outnumber slots, you should be careful about adding slots.
-
-
+    <br>
+    Ok, so what does this mean? It means that when you add a slot, it increases the total checks done by the amount of dependencies. Since dependencies will basically always outnumber slots (mainly due to having other plugins), <b>think carefully about adding slots</b>.
+    <h2 id="FixesCalculationsShortCircuit">How Can I Avoid the Worst-Case Scenario?</h2>
+    Because the search is comprehensive, it checks each group of dependencies at least once. You can't do anything about that, but what you <i>can</i> affect is the internals of each group. The main concept is what order you put dependencies when using AND (the comma). If you need to have A AND B and find that you don't have A, you can skip checking B since you already know you can't have both; this is a concept known as "short-circuiting" in programming.<br>
+    <br>
+    Let's say you have <code> { dependencies = { "sick_part", "uncool_part_01|uncool_part_02|uncool_part_03|uncool_part_04|uncool_part_05|uncool_part_06|uncool_part_07"}, },</code> <br>
+    When you have a weapon that uses none of those parts, they'll start by seeing they lack "sick_part" and immediately stop checking this group. If the order was swapped, they would've needed to check the entire OR chain. That's 1 check vs 7 checks, which is a 700%! Now, realistically, this relatively big difference ends up being a very small impact in the end because modern machines are beasts. However, that doesn't mean you shouldn't aim to optimize, especially when it's as easy as this.<br>
+    <br>
+    This is applied from <code>gear_settings.lua</code> line 1242: <code>for _, dependency_entry in pairs(fix_data.dependencies) do</code>. This line is saying for each group of dependencies, check each entry (so with the earlier example, the first entry is <code>"sick_part"</code> while the second is <code>"uncool_part_01|uncool_part_02|uncool_part_03|uncool_part_04|uncool_part_05|uncool_part_06|uncool_part_07"</code>).<br>
+    It does a lot of things to actually check, but the main point is at the end of each dependency check within a group: <code>
+                has_dependencies = has_dependency_possibility
+								if not has_dependencies then break end
+    </code><br>
+    This means "if this whole entry doesn't match, stop checking." <i>That's</i> the short-circuiting in action.
   </body>
 </html>
