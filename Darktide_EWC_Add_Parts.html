@@ -29,6 +29,7 @@ title: Darktide Creating a Weapon Customization Plugin
 
     <h1 id="Basics">Going Through the Template</h1>
     I'll briefly cover each part of this, but I won't discuss the comments. These explain each parameter for each step, and you can read those yourself. <br>
+    This template demonstrates how to add basic attachments to an existing slot. The example is adding the Shredder Autopistol iron sights to the Autoguns, but this can be applied to any combination of part and weapon family.<br>
 
     <h2 id="BasicsData">Technical Setup</h2>
     The first line of the template is something every Darktide mod does, getting a reference for itself so it can use features from Darktide Mod Framework. <br>
@@ -124,5 +125,23 @@ title: Darktide Creating a Weapon Customization Plugin
       )
     </pre>
     This injects your attachment by its ID into the slot's table. In general, I'm not sure how necessary this is, but I do know it's required for having functional scopes with lenses.
+  
+    <h1 id="Kitbashing">Comparing the Template to Functions from the MT Plugin</h1>
+    
+    <h1 id="FixesCalculations">Analyzing Fixes, Dependencies, and Efficiency</h1>
+    As you'll recall, fixes are the instructions to change position/rotation/scale for attachments, and the appropriate ones are applied (on a per weapon basis) by searching through all the fixes in the weapon family's anchors (fixes table) for matching dependencies. <br>
+    <br>
+    The code used to find fixes is in <code>weapon_customization/scripts/mods/weapon_customization/classes/gear_settings.lua</code> on (as of writing) line 1190: <code>GearSettings.apply_fixes = function(self, gear_id_or_item, unit_or_name)</code>. This is ~150 lines, so I'll only break down what I believe are the highlights.<br>
+    <br>
+    First, it checks if this weapon has customizations available. If so, it searches to see if this weapon family has fixes available. Then, it checks <i>every</i> attachment slot to list out <b>all of this weapon's currently equipped attachments</b>. Once it has this list, it goes through some quick checks to see if dependencies need to be checked at all.<br>
+    <br>
+    EWC uses the native function <code>table.contains</code> to see if the dependencies contain at least one of the equipped attachments. It'll go through <i>every dependency check</i> in the fixes table for this weapon family. Since this is a comprehensive search, that means that every fix you add affects performance (very minorly) for all the weapons in the family, not just the ones with your parts equipped.<br>
+    The key here is that we can calculate the worst-case total amount of checks made, checking every single dependency.<br>
+    We have every slot checked for each dependencies, so we can call it <code>(number_of_slots * possible_dependencies) = total checks done</code><br>
+    If you add another slot, that gives <code>(number_of_slots + 1) * possible_dependencies = (number_of_slots * possible_dependencies) + possible_dependencies</code> <br>
+    If you add another dependency check, that gives <code>number_of_slots * (possible_dependencies + 1) = (number_of_slots * possible_dependencies) + number_of_slots</code> <br>
+    Ok, so what does this mean? It means that when you add a slot, it increases the total checks done by the amount of dependencies. Since dependencies will always outnumber slots, you should be careful about adding slots.
+
+
   </body>
 </html>

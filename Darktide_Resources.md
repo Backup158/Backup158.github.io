@@ -57,7 +57,7 @@ Some of these are actual mods, while some of these are just proofs of concept. T
 - Enemy spawn replacer by Wobin (does not always work in solo play?)
 - [Don't Start Empty Games](https://discord.com/channels/1048312349867646996/1073779856338329780) by raindish. Leave if a lobby is about to start and you're the only one in the lobby
 - [(NOT WORKING) FriendZone](https://github.com/LeicaSimile/friend_zone/blob/main/scripts/mods/friend_zone/core/zone_manager.lua) by ashe. Idea was to put circles showing the range of auras, smokes, etc
-- [CharacterGrid](https://discord.com/channels/1048312349867646996/1079236027690012773/1383903098329763851) by defallt. Puts character select into a grid for less scrolling. [Updated version on 2025-06-26](https://discord.com/channels/1048312349867646996/1079236027690012773/1387946912413651068) by xsSplater
+- [CharacterGrid](https://discord.com/channels/1048312349867646996/1395344054698377227) by defallt. Puts character select into a grid for less scrolling. Not supported.
 
 ## Mission ID Checkers
 
