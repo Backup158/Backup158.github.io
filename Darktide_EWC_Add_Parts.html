@@ -156,5 +156,34 @@ title: Darktide Creating a Weapon Customization Plugin
 								if not has_dependencies then break end
     </code><br>
     This means "if this whole entry doesn't match, go to the next group (stop checking this group)." <i>That's</i> the short-circuiting in action.
+    <h2 id="FixesCalculationsOriginalItems">What is the Ampersand (&) Doing in Dependencies?</h2>
+    Good question. You may have seen it pop up in one of the plugins. For example, this fix for the plasmagun in the MT Plugin: <br>
+    <code>
+      {dependencies = {"!&barrel"}, -- Magazine
+        barrel = {offset = true, position = vector3_box(0, -.01, 0.04), rotation = vector3_box(0, 0, 0), scale = vector3_box(1.3, 1, 1.5)}},
+ 
+    </code>[sic]
+    This isn't really explained anywhere. However, digging through <code>gear_settings.lua</code> sheds some light. Starting on line 1256, there is: <br> 
+    <code>
+    if self:cached_find(possibility.possibility, "&") then
+      possibility.original_item = true
+      possibility.possibility = self:cached_gsub(possibility.possibility, "&", "")
+    end
+  </code>
+  This is inside of the "searching for dependencies" part. It basically means "if the dependency we're currently checking has an &, it's an attachment from the base mod." It does this by flagging the item as a base mod attachment, then removes the ampersand from it. <br>
+
+  Wait, but how does it know it's an original item? That actually happens at game launch. It runs
+  <code>
+  GearSettings.original_item = function(self, gear_id_or_item)
+		-- Setup master items backup
+		mod:setup_item_definitions()
+		-- Get item from potential gear id
+		local item = self:item_from_gear_id(gear_id_or_item)
+		local item_name = item and item.name
+		-- Return original item
+		return item_name and mod:persistent_table(REFERENCE).item_definitions[item_name]
+	end
+  </code>
+  on game start to mark the base mod's things as original, then it puts them into a table for referenced later (now).
   </body>
 </html>
