@@ -126,10 +126,50 @@ title: Darktide Creating a Weapon Customization Plugin
     </pre>
     This injects your attachment by its ID into the slot's table. In general, I'm not sure how necessary this is, but I do know it's required for having functional scopes with lenses.<br>
     <br>
-    <h1 id="Kitbashing">Comparing the Template to Functions from the MT Plugin</h1>
-    UNDER CONSTRUCTION
+    <h1 id="MTFunctions">Comparing the Template to Functions from the MT Plugin</h1>
+    Now, those basic operations were (in the grand scheme of things) pretty simple. However, it's easy to forget the exact syntax on which one to use, and any errors will produce generic error messages (something like <code>attempting to insert to table nil</code>). <br>
+    The MT Plugin, the first major plugin for EWC, created some helper functions to ease the workflow for us plugin authors. It mainly makes it simple to inject multiple attachments in one declaration and adds some more detailed error messages. Later major plugins have adopted these helpers. <br>
+    For simplicity, I'll refer to the ways shown in the template plugin as "the base mod method" and using these helper functions as "the MT method" <br>
+    Let's take a look at the Attachment Injection part.
+    <h2 id="MT_Functions_inject_attachments">MT: Inject Attachments</h2>
+    <pre class="codeBlock">
+      function mod.inject_attachments(variant_id, slot, attachments_table)
+		if not wc.attachment[variant_id] then
+			mod:error(string.format("attachment variant_id [%s] invalid", variant_id))
+			return
+		end
+		if not wc.attachment[variant_id][slot] then
+			mod:error(string.format("attachment slot [%s.%s] invalid", variant_id, slot))
+			return
+		end
+
+		attachment_ids[variant_id] = attachment_ids[variant_id] or {}
+		attachment_ids[variant_id][slot] = attachment_ids[variant_id][slot] or {}
+
+		for _, attachment in ipairs(attachments_table) do
+			if not string.sub(attachment.name, 1, 3) == "MT " then
+				attachment.name = "MT "..attachment.name
+			end
+
+			table.insert(wc.attachment[variant_id][slot], attachment)
+			table.insert(attachment_ids[variant_id][slot], attachment.id)
+		end
+	end
+    </pre>
+
+
+    By the base method, there is 
+    <pre class="codeBlock">
+      table.insert(
+        wc.attachment.autogun_p1_m1.sight,
+        {id = "autogun_pistol_sight_01", name = "Autopistol Sight"}
+      )
+    </pre>
+    The equivalent using the MT method would be
+
+
     <br>
-    <h1 id="FixesCalculations">Analyzing Fixes, Dependencies, and Efficiency</h1>
+    <h1 id="FixesCalculations">Analyzing Fixes and Dependencies for Efficiency</h1>
     As you'll recall, fixes are the instructions to change position/rotation/scale for attachments, and the appropriate ones are applied (on a per weapon basis) by searching through all the fixes in the weapon family's anchors (fixes table) for matching dependencies. <br>
     <br>
     The code used to find fixes is in <code>weapon_customization/scripts/mods/weapon_customization/classes/gear_settings.lua</code> on (as of writing) line 1190: <code>GearSettings.apply_fixes = function(self, gear_id_or_item, unit_or_name)</code>. This is ~150 lines, so I'll only break down what I believe are the highlights.<br>
@@ -184,6 +224,6 @@ title: Darktide Creating a Weapon Customization Plugin
 		return item_name and mod:persistent_table(REFERENCE).item_definitions[item_name]
 	end
   </code>
-  on game start to mark the base mod's things as original, then it puts them into a table for referenced later (now).
+  on game start to mark the base mod's things as original, then it puts them into a table for referenced later (which would be now).
   </body>
 </html>
