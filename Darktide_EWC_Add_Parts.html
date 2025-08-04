@@ -130,34 +130,8 @@ title: Darktide Creating a Weapon Customization Plugin
     Now, those basic operations were (in the grand scheme of things) pretty simple. However, it's easy to forget the exact syntax on which one to use, and any errors will produce generic error messages (something like <code>attempting to insert to table nil</code>). <br>
     The MT Plugin, the first major plugin for EWC, created some helper functions to ease the workflow for us plugin authors. It mainly makes it simple to inject multiple attachments in one declaration and adds some more detailed error messages. Later major plugins have adopted these helpers. <br>
     For simplicity, I'll refer to the ways shown in the template plugin as "the base mod method" and using these helper functions as "the MT method" <br>
-    Let's take a look at the Attachment Injection part.
+    Let's take a look at the Attachment Injection part through methods.
     <h2 id="MT_Functions_inject_attachments">MT: Inject Attachments</h2>
-    <pre class="codeBlock">
-      function mod.inject_attachments(variant_id, slot, attachments_table)
-		if not wc.attachment[variant_id] then
-			mod:error(string.format("attachment variant_id [%s] invalid", variant_id))
-			return
-		end
-		if not wc.attachment[variant_id][slot] then
-			mod:error(string.format("attachment slot [%s.%s] invalid", variant_id, slot))
-			return
-		end
-
-		attachment_ids[variant_id] = attachment_ids[variant_id] or {}
-		attachment_ids[variant_id][slot] = attachment_ids[variant_id][slot] or {}
-
-		for _, attachment in ipairs(attachments_table) do
-			if not string.sub(attachment.name, 1, 3) == "MT " then
-				attachment.name = "MT "..attachment.name
-			end
-
-			table.insert(wc.attachment[variant_id][slot], attachment)
-			table.insert(attachment_ids[variant_id][slot], attachment.id)
-		end
-	end
-    </pre>
-
-
     By the base method, there is 
     <pre class="codeBlock">
       table.insert(
@@ -166,8 +140,52 @@ title: Darktide Creating a Weapon Customization Plugin
       )
     </pre>
     The equivalent using the MT method would be
+    <pre class="codeBlock">
+      function mod.inject_attachments(variant_id, slot, attachments_table)
+        if not wc.attachment[variant_id] then
+          mod:error(string.format("attachment variant_id [%s] invalid", variant_id))
+          return
+        end
+        if not wc.attachment[variant_id][slot] then
+          mod:error(string.format("attachment slot [%s.%s] invalid", variant_id, slot))
+          return
+        end
 
+        attachment_ids[variant_id] = attachment_ids[variant_id] or {}
+        attachment_ids[variant_id][slot] = attachment_ids[variant_id][slot] or {}
 
+        for _, attachment in ipairs(attachments_table) do
+          if not string.sub(attachment.name, 1, 3) == "MT " then
+            attachment.name = "MT "..attachment.name
+          end
+
+          table.insert(wc.attachment[variant_id][slot], attachment)
+          table.insert(attachment_ids[variant_id][slot], attachment.id)
+        end
+      end
+    </pre>
+    Wow. That looks like a big difference. However, the core functionality is the same. Since you already know what the base method means, let's break the MT method down. <br>
+    The parameters <code>variant_id, slot, attachments_table</code> are given when you call this function to specify which weapon the attachment is for, which slot it goes into, and the list of ids and names. I'll elaborate later.<br>
+    The two <code>if not ...</code> blocks are to make sure EWC supports the weapon before we try injecting into it, and it'll exit if the weapon is not supported. This is mainly to give us plugin authors more obvious error messages. Without this, when we injected it would've said something like <code>Argument to table.insert is nil (expected table)</code> without specifying where the table came from (so you won't know which weapon caused the issue).<br>
+    Next, it's getting currently present attachments and slots from the plugin it comes from. <code>attachment_ids</code> is a table created by each plugin that uses this method, and it's created before any of these functions are run. The <code>or {}</code> part is to automatically assign it an empty table on the first try. It means "use what exists or create an empty table" because Lua automatically uses the first value in an "or" boolean operation if that first value exists.<br>
+    The for loop goes through every attachment id/name pair and injects them. I kind of blew past the parameters, so that may be a bit confusing, so let's go through an example. I'll use a simplified part of my OwO plugin, the slim blades:
+    <pre class="codeBlock">
+      mod.inject_attachments("powersword_p1_m1", "blade", {
+        {id = "owo_slim_dclaw_01", name = "OwO Slim DClaw 1"},
+        {id = "owo_slim_dclaw_02", name = "OwO Slim DClaw 2"},
+        {id = "owo_slim_dclaw_03", name = "OwO Slim DClaw 3"},
+        {id = "owo_slim_dclaw_04", name = "OwO Slim DClaw 4"},
+        {id = "owo_slim_dclaw_05", name = "OwO Slim DClaw 5"},
+        {id = "owo_slim_dclaw_06", name = "OwO Slim DClaw 6"},
+        {id = "owo_slim_dclaw_07", name = "OwO Slim DClaw 7"},
+      })
+    </pre>
+    With the base method, <code>table.insert</code> can only take one attachment at a time. That means I would've had to type <code>table.insert(wc.attachment.powersword_p1_m1.blade, {id = "owo_slim_dclaw_0n", name = "OwO Slim DClaw n"})</code> 7 times (or manually created a loop every time). With the MT method, I gave it the table and it'll run that automatically for each id/name pair in each subtable.<br>
+    It also does a bit more. The <code>if not string.sub</code> part is to check if the first 3 characters of the name is "MT ", and if not, it adds it to the front. Unfortunately, it doesn't really work lol. If it did, you'd replace that with your preferred prefix.<br>
+    <code>table.insert(wc.attachment[variant_id][slot], attachment)</code><br>
+    is the equivalent part to the base method, just using index notation instead of dot notation because that's how Lua syntax works. So technically, you could say the MT method is the same as the base method but with some extra checks on top.<br>
+    <code>table.insert(attachment_ids[variant_id][slot], attachment.id)</code><br>
+    adds the id to the plugin's list of attachment ids to validate later.
     <br>
     <h1 id="FixesCalculations">Analyzing Fixes and Dependencies for Efficiency</h1>
     As you'll recall, fixes are the instructions to change position/rotation/scale for attachments, and the appropriate ones are applied (on a per weapon basis) by searching through all the fixes in the weapon family's anchors (fixes table) for matching dependencies. <br>
