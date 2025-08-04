@@ -27,6 +27,8 @@ title: Darktide Creating a Weapon Customization Plugin
         I have a <a href="https://youtu.be/e4QcBg96gR8">quick demo video</a> for using it in this context.</li>
     </ol>
     <br>
+    =============================
+    <br>
     <h1 id="Basics">Going Through the Template</h1>
     I'll briefly cover each part of this, but I won't discuss the comments. These explain each parameter for each step, and you can read those yourself. <br>
     This template demonstrates how to add basic attachments to an existing slot. The example is adding the Shredder Autopistol iron sights to the Autoguns, but this can be applied to any combination of part and weapon family.<br>
@@ -126,11 +128,13 @@ title: Darktide Creating a Weapon Customization Plugin
     </pre>
     This injects your attachment by its ID into the slot's table. In general, I'm not sure how necessary this is, but I do know it's required for having functional scopes with lenses.<br>
     <br>
-    <h1 id="MTFunctions">Comparing the Template to Functions from the MT Plugin</h1>
+    =============================
+    <br>
+    <h1 id="MT_Functions_Wrapping">Comparing the Template to Functions from the MT Plugin</h1>
     Now, those basic operations were (in the grand scheme of things) pretty simple. However, it's easy to forget the exact syntax on which one to use, and any errors will produce generic error messages (something like <code>attempting to insert to table nil</code>). <br>
-    The MT Plugin, the first major plugin for EWC, created some helper functions to ease the workflow for us plugin authors. It mainly makes it simple to inject multiple attachments in one declaration and adds some more detailed error messages. Later major plugins have adopted these helpers. <br>
+    The MT Plugin, the first major plugin for EWC, created some helper functions to ease the workflow for us plugin authors. It wraps the base method functions with some extra functions to make it simpler to inject multiple attachments in one declaration and adds some more detailed error messages. Later major plugins have adopted these helpers. <br>
     For simplicity, I'll refer to the ways shown in the template plugin as "the base mod method" and using these helper functions as "the MT method" <br>
-    Let's take a look at the Attachment Injection part through methods.
+    Let's take a look at the Attachment Injection part through both methods. The other two parts (Model Injection and Fixes Injection) follow the same structure.
     <h2 id="MT_Functions_inject_attachments">MT: Inject Attachments</h2>
     By the base method, there is 
     <pre class="codeBlock">
@@ -183,9 +187,37 @@ title: Darktide Creating a Weapon Customization Plugin
     With the base method, <code>table.insert</code> can only take one attachment at a time. That means I would've had to type <code>table.insert(wc.attachment.powersword_p1_m1.blade, {id = "owo_slim_dclaw_0n", name = "OwO Slim DClaw n"})</code> 7 times (or manually created a loop every time). With the MT method, I gave it the table and it'll run that automatically for each id/name pair in each subtable.<br>
     It also does a bit more. The <code>if not string.sub</code> part is to check if the first 3 characters of the name is "MT ", and if not, it adds it to the front. Unfortunately, it doesn't really work lol. If it did, you'd replace that with your preferred prefix.<br>
     <code>table.insert(wc.attachment[variant_id][slot], attachment)</code><br>
-    is the equivalent part to the base method, just using index notation instead of dot notation because that's how Lua syntax works. So technically, you could say the MT method is the same as the base method but with some extra checks on top.<br>
+    is the equivalent part to the base method, just using index notation instead of dot notation because that's how Lua syntax works.<br>
     <code>table.insert(attachment_ids[variant_id][slot], attachment.id)</code><br>
-    adds the id to the plugin's list of attachment ids to validate later.
+    adds the id to the plugin's list of attachment ids to validate later. <br>
+    <br>
+    In the end, that means instead of writing the <code>table.insert</code> line over and over again, I call this function and give it a table, which is much more natural and easier to remember.
+    <br>
+    =============================
+    <br>
+    <h1 id="Advanced_Weapon_Files">Organizing Your Code to Add Attachments to Multiple Weapons</h1>
+    Using either method, you could simply put that all into the main file and call it a day. That's fine for very simple plugins, but it can <i>very</i> quickly get disorganized. That's why the base mod and every major plugin splits things into separate files. The base mod has to create all the initial tables, while the MT method only concerns itself with injecting attachements/models/fixes, so I'll mainly break down the MT method, using the modified slim blades example above.<br>
+    <br>
+    First of all, you have your main mod file (<code>weapon_customization_your_plugin.lua</code>) which defines your helper functions and executes the other files. With the MT method, plugins create "common" files to define functions including injections for attachments and models, then they have "weapon" files (one for each weapon family) to call those functions for the respective weapon family. The "common" and "weapon" files are listed in <code>files_to_load.lua</code> file, which runs them. <code>files_to_load</code> gets run in the main mod file. For my example, let's say I want to add the slim blades to the Power Swords and the Catachan "Devil's Claw" Combat Swords. The folder structure looks like this:
+    <pre class="codeBlock">
+      weapon_customization_your_plugin
+      |-- scripts/mods/weapon_customization_your_plugin
+          |-- weapon_customization_your_plugin.lua
+          |-- weapon_customization_your_plugin_data.lua
+          |-- weapon_customization_your_plugin_localization.lua
+          |-- files_to_load.lua
+          |-- common
+              |-- melee.lua
+          |-- weapon
+              |-- combatsword_p1_m1.lua
+              |-- powersword_p1_m1.lua
+    </pre>
+    
+    <br>
+    You create a Lua file for each weapon family and name it after the first mark (you could technically name it whatever you want). Let's say I want to add parts to the Power Sword and Catachan "Devil's Claw" Combat Swords. 
+    <h2 id="Advanced_Injects_in_Functions">Bundling Injections for Reuse</h1>
+    <br>
+    =============================
     <br>
     <h1 id="FixesCalculations">Analyzing Fixes and Dependencies for Efficiency</h1>
     As you'll recall, fixes are the instructions to change position/rotation/scale for attachments, and the appropriate ones are applied (on a per weapon basis) by searching through all the fixes in the weapon family's anchors (fixes table) for matching dependencies. <br>
