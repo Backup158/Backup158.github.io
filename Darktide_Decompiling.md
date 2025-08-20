@@ -52,7 +52,7 @@ The Darktide community hosts a copy of these in a [GitHub repository, maintained
     - Where you download it to doesn't really matter
 3. Replace the contents of your fork (besides the README) with the contents of the `output` folder
     - **Make sure you used the `-m` flag when you ran the decompiler!** 
-    - **Make sure you're using the latest decompiler version!**
+    - **Make sure you're using the latest decompiler version!** I don't know how to compile this from source because I'm a fraud! So that's not written here!
     - Otherwise there will be unecessary differences and you'll have to redo the PR
     - Delete all, then add all
     - This way you catch if something was deleted
