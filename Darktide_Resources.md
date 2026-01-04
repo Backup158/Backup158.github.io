@@ -19,6 +19,10 @@ Deep dive into game mechanics, based on source code review.
 
 Calculates weapon breakpoints (hits to kill) for enemy types. Unsure if this is updated.
 
+\>\> [thyazide's Performance Optimization Guide](https://github.com/thyazide/Darktide-Performance-Optimizations)
+
+Compiles knowledge from various forum posts and research into one page, for a one-stop shop for improving game performance.
+
 # Modding
 \>\> [NexusMods](https://www.nexusmods.com/games/warhammer40kdarktide)
 
