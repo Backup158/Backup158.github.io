@@ -57,7 +57,7 @@ Some of these are actual mods, while some of these are just proofs of concept. T
 - Enemy spawn replacer by Wobin (does not always work in solo play?)
 - [Don't Start Empty Games](https://discord.com/channels/1048312349867646996/1073779856338329780) by raindish. Leave if a lobby is about to start and you're the only one in the lobby
 - [(NOT WORKING) FriendZone](https://github.com/LeicaSimile/friend_zone/blob/main/scripts/mods/friend_zone/core/zone_manager.lua) by ashe. Idea was to put circles showing the range of auras, smokes, etc
-- [CharacterGrid](https://discord.com/channels/1048312349867646996/1395344054698377227) by defallt. Puts character select into a grid for less scrolling. Not supported.
+- [Psych Ward Adjustments](https://discord.com/channels/1048312349867646996/1087131893075550308/1427618747337801738) by Fracticality with edits by XsSplater. Adjusts the Psych Ward buttons to stop overlapping.
 
 ## Mission ID Checkers
 
