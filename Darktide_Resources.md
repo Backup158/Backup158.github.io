@@ -26,7 +26,7 @@ Where most mods are hosted. Requires an account (free) for downloads.
 
 \>\> [dtkit-patch](https://github.com/manshanko/dtkit-patch)
 
-The original source for the script that patches Darktide to be able to load mods. This includes a precompiled binary for Linux, too.
+This is included in Darktide Mod Loader. The original source for the script that patches Darktide to be able to load mods. This includes a precompiled binary for Linux, too.
 
 \>\> [Darktide Modders Discord](https://discord.gg/rKYWtaDx4D)
 
