@@ -28,6 +28,10 @@ Where most mods are hosted. Requires an account (free) for downloads.
 
 This is included in Darktide Mod Loader. The original source for the script that patches Darktide to be able to load mods. This includes a precompiled binary for Linux, too.
 
+\>\> [dt-mod-autopatch](https://github.com/manshanko/dt-mod-autopatch/releases/latest)
+
+Automatically runs the mod toggle if you start the game without mods enabled. Drag and drop into the game folder, after installing DML.
+
 \>\> [Darktide Modders Discord](https://discord.gg/rKYWtaDx4D)
 
 Most discussion and troubleshooting happens here (rip search engine indexing)
