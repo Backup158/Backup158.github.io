@@ -53,7 +53,7 @@ Previously, there were native versions for limn. However, newer versions (0.6.1+
 3. Run limn through wine: `wine ./limn.exe -i "<darktide_install_folder>/bundle"`
     - In my case: `wine ./limn-0.7.1-x86_64-pc-windows-msvc/limn.exe -i "/mnt/data/SteamLibrary/steamapps/common/Warhammer 40,000 DARKTIDE/bundle"`
         - This example has limn inside an extra folder
-        - My Darktide is installed on a mounted drive. Yours might not be
+        - This example has Darktide installed on a mounted drive, so your install location may look different
     - Use whatever additional arguments you want for lua only or whatever
     - Make sure you include the `.exe`. Current versions of wine apparently require that.
     - At first, wine may need to create a config file for this
