@@ -1,3 +1,19 @@
+IGNORE THIS MOST OF THIS IS OUT OF DATE, mainly the SMQ section
+
+I have some yapping here instead: https://steamcommunity.com/sharedfiles/filedetails/?id=3244034734
+
+
+
+
+
+
+
+---------------------------
+
+
+
+
+
 Here's a collection of my thoughts comparing various mod management methods for *Warhammer 40,000: Darktide*.
 
 While I haven't used them all extensively, I know bit about each of them and figured I'd put all my thoughts in one place to come back to later.
