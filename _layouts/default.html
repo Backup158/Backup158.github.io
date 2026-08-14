@@ -34,6 +34,7 @@
         --color-clicked-button-background: #ccc;
         --color-hyperlink: #86d37a;
         --color-hyperlink-clicked: #e18bbc;
+        --color-code-block-background: #2b2b2b;
       }
       /* Conditional styling */
       @media (prefers-color-scheme: light) {
@@ -42,6 +43,7 @@
           --color-text: rgb(0, 0, 0);
           --color-background: rgb(255, 254, 205); /* Kinda piss colored */
           --color-collapsible-content-background: #f1f1f1;
+          --color-code-block-background: #caff97; /* kind of like a key lime to contrast with the piss. text will be black automatically */
         }
       }
       /* Assign variables to page color and background */
@@ -137,7 +139,7 @@
       } 
 
       code {
-        background: #2b2b2b;
+        background: var(--color-code-block-background);
         font-size: 125%;
         padding: 2px;
       }
