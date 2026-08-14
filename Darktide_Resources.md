@@ -110,7 +110,7 @@ Unreadable until you use...
 \>\> [luajit decompiler](https://github.com/Aussiemon/luajit-decompiler-v2)
 
 Decompiles the lua bytecode into readable lua code.  \
-Thanks to Aussiemoon.  \
+Thanks to Aussiemon.  \
 There is a [precompiled version](https://github.com/igromanru/luajit-decompiler-v2/releases/latest) for your convenience, thanks to igromanru
 
 For these two, the commands are written in the readmes, but I'll just throw it in [my own page](Darktide_Decompiling) because I'm special hehe

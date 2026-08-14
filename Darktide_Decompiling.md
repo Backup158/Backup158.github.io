@@ -40,7 +40,7 @@ The main instructions will be written from a Windows perspective. I'm assuming y
     - This dumps the lua code into the `output` folder
     - ex: `luajit-decompiler-v2.exe out -m`
         - This is assuming you put the `.exe` files in the same folder, as written in step 1
-        - `-m` means minimize changes, so it adds trailing commas and stuff (this doesn't really matter for us but it's how it's done in Aussiemoon's repository to share with us)
+        - `-m` means minimize changes, so it adds trailing commas and stuff (this doesn't really matter for us but it's how it's done in Aussiemon's repository to share with us)
 6. You're done! Read the output with your method of choice
 
 ## Linux Instructions
@@ -65,7 +65,7 @@ Previously, there were native versions for limn. However, newer versions (0.6.1+
     - I assume you could compile the latest luajit version like any other C++ project but I'm a fraud :3
 
 # Uploading These Files
-The Darktide community hosts a copy of these in a [GitHub repository, maintained by Aussiemoon](https://github.com/Aussiemon/Darktide-Source-Code). If you decompiled the code before Aussiemoon caught up to the latest patch, you can make a pull request (PR), if you have a GitHub account. However, make sure you have the latest versions of both tools.
+The Darktide community hosts a copy of these in a [GitHub repository, maintained by Aussiemon](https://github.com/Aussiemon/Darktide-Source-Code). If you decompiled the code before Aussiemon caught up to the latest patch, you can make a pull request (PR), if you have a GitHub account. However, make sure you have the latest versions of both tools.
 
 1. Fork the repository
 2. Clone your fork locally
