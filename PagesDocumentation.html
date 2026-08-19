@@ -36,5 +36,27 @@ title: GitHub Pages Notes
       <li><a href="/StartupProcessCopy.md">1 Relative linking to file in same repo.</a> but with proper formatting, you stupid bitch</li>
     </ul>
 
+    <h2>Styling Pages</h2>
+    <p>I have a few desires for my GitHub pages:
+      <ul>
+        <li>It automatically generates the HTML from the README.md</li>
+        <li>The HTML pages copies the markdown styling, including the GitHub banner comments (tips, warnings, etc.)</li>
+        <li>I don't have to manually copy style settings, since that means I'd have to repaste things across multiple repos</li>
+      </ul>
+      Given that, I think I have a workable workflow. Let's say I have this new repository Wz93Enjoyers. My styling files are hosted on the repo for OwO, and this repo can have a link to the new repo.
+      <ol>
+        <li>Write the README.md in the docs folder of the repo</li>
+        <li>Go into the repo settings and enable Pages deployment</li>
+        <li>Create a `_config.yml` so I can specify the title, description, and basic theme</li>
+        <li>Create `assets/css/style.scss`</li>
+        <li>Paste the two lines of `---` then the `@import "https://backup158.github.io/DarktideWeaponCustomizationOwO/assets/css/style.css";`</li>
+        <li>Touch the Gemfile in the docs folder</li>
+        <li>Copy the Gemfile contents from OwO (this wouldn't change often so I made sacrifices)</li>
+        <li>Run `bundle install`</li>
+        <li>I think it'd be fine now? But I still built the local version with `bundle exec jekyll serve`</li>
+        <li>I think the build on commit is part of this repo</li>
+        <li>Oh speaking of this repo, edit `_data/navigation.yml` to add a link here</li>
+      </ol>
+    </p>
   </body>
 </html>
