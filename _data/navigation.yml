@@ -25,10 +25,13 @@ toc:
       #  description: Going through how I created a Darktide mod
       - page: EWC Info Page
         url: /DarktideWeaponCustomizationOwO/EWC_FAQ
-        description: Informational page for the Extended Weapon Customization mod.
+        description: Informational page for the Extended Weapon Customization mod
       - page: MasterItems Analysis for EWC
         url: /DarktideMasterItemsDumpForEWC/
         description: Helpers for updating the MasterItems info spreadsheet for use with EWC plugin development
+      - page: My Darktide Mods
+        url: https://github.com/stars/Backup158/lists/darktide-mods
+        description: Repositories for all the Darktide mods I've messed around with
   - title: Other Modding
     subfolderitems:
       - page: HD2 Modding on Linux
@@ -36,7 +39,7 @@ toc:
         description: Running Helldivers 2 Modding Tools on Linux
       - page: Nexus Mods Features
         url: /NexusModsTricks.html
-        description: Showcasing some (surprisely little known) features on Nexus Mods
+        description: Showcasing some (surprisingly little known) features on Nexus Mods
       - page: Gladius Mods
         url: /GladiusMods/
         description: Links to my Gladius mods on Steam Workshop
