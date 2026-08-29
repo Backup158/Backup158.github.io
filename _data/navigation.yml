@@ -12,6 +12,9 @@ toc:
       - page: GitHub Pages
         url: /PagesDocumentation.html
         description: Some documentation for working with GitHub Pages
+      - page: Steam Library Art
+        url: /SmugnessOfSisterwife.html
+        description: Custom Steam library art edits I've thrown together.
   - title: Warhammer 40,000 - Darktide
     subfolderitems:
       - page: Darktide Resources
